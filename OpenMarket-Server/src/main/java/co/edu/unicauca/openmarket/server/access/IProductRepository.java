@@ -1,5 +1,6 @@
 package co.edu.unicauca.openmarket.server.access;
 
+import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.List;
 
 /*

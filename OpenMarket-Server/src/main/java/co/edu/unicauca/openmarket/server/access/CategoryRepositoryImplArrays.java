@@ -4,6 +4,7 @@
  */
 package co.edu.unicauca.openmarket.server.access;
 
+import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public class CategoryRepositoryImplArrays implements ICategoryRepository{
     /**
-     * Array List de clientes
+     * Array List de categorias
      */
     private static List<Category> categories;
 
@@ -94,17 +95,15 @@ public class CategoryRepositoryImplArrays implements ICategoryRepository{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
+    
     /**
     * Encuentra todas las categorias del arreglo.
     *
     * @return El arreglo de las categorias
     */
+    @Override
     public List<Category> findAllC() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-    
+    } 
 }
 

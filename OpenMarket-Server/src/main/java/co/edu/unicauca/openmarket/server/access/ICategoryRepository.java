@@ -4,6 +4,7 @@
  */
 package co.edu.unicauca.openmarket.server.access;
 
+import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.List;
 
 /**

@@ -4,10 +4,85 @@
  */
 package co.edu.unicauca.openmarket.server.domain.services;
 
+import co.edu.unicauca.openmarket.server.access.ICategoryRepository;
+import co.edu.unicauca.openmarket.server.access.IProductRepository;
+import co.unicauca.strategyserver.helpers.JsonError;
+import co.unicauca.strategyserver.helpers.Utilities;
+import com.google.gson.Gson;
+import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Alejandro
  */
 public class ProductService {
-    
+    /**
+     * Repositorio de clientes
+     */
+    IProductRepository repo;
+
+    /**
+     * Constructor parametrizado. Hace inyeccion de dependencias
+     *
+     * @param repo repositorio de tipo ICustomerRepository
+     */
+    public ProductService(IProductRepository repo) {
+        this.repo = repo;
+    }
+
+    /**
+     * Buscar un cliente
+     *
+     * @param id cedula
+     * @return objeto tipo Customer
+     */
+    public synchronized Product findProduct(long id) {
+        return repo.findById(id);
+    }
+
+    /**
+     * Crea una nueva categoria. Aplica validaciones de negocio
+     *
+     * @param category cliente
+     * @return devuelve la cadena "true" si fue creado, en caso contrario retornará errorsJson
+     */
+    public synchronized String createProduct(Product product) {
+        List<JsonError> errors = new ArrayList<>();
+  
+        // Validaciones y reglas de negocio
+        if (product.getProductId().equals(null) || product.getName().isEmpty() || product.getDescription().isEmpty()) {
+           errors.add(new JsonError("400", "BAD_REQUEST","Id, nombre y descripcion son obligatorios. "));
+        }
+        
+        if (product.getProductId() < 0){
+            errors.add(new JsonError("400", "BAD_REQUEST","El id de categoria no puede ser negativo. "));
+        }
+
+        if(!Utilities.isNumeric(product.getProductId().toString())){
+            errors.add(new JsonError("400", "BAD_REQUEST","El id debe contener sólo dígitos "));
+        }
+        
+        if(Utilities.isNumeric(product.getDescription())){
+            errors.add(new JsonError("400", "BAD_REQUEST","La descripcion del producto debe contener sólo letras "));
+        }
+        
+        // Que no esté repetido
+        Product productSearched = this.findProduct(product.getProductId());
+        if (productSearched != null){
+            errors.add(new JsonError("400", "BAD_REQUEST","La categoría ya existe. "));
+        }
+        
+       if (!errors.isEmpty()) {
+            Gson gson = new Gson();
+            String errorsJson = gson.toJson(errors);
+            return errorsJson;
+        }             
+       
+       
+        return String.valueOf(repo.save(product));
+    }
+
+   
 }
