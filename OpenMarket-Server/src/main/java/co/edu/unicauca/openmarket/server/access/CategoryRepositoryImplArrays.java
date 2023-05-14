@@ -14,7 +14,7 @@ import java.util.List;
  */
 public class CategoryRepositoryImplArrays implements ICategoryRepository{
     /**
-     * Array List de categorias
+     * Array List de clientes
      */
     private static List<Category> categories;
 
@@ -95,7 +95,7 @@ public class CategoryRepositoryImplArrays implements ICategoryRepository{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
+    @Override
     /**
     * Encuentra todas las categorias del arreglo.
     *
