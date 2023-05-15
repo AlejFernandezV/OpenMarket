@@ -1,0 +1,7 @@
+com\unicauca\edu\co\openmarket\commons\infra\Parameters.class
+com\unicauca\edu\co\openmarket\commons\infra\Utilities.class
+com\unicauca\edu\co\openmarket\commons\infra\JsonError.class
+com\unicauca\edu\co\openmarket\commons\infra\Parameter.class
+com\unicauca\edu\co\openmarket\commons\domain\Product.class
+com\unicauca\edu\co\openmarket\commons\infra\Protocol.class
+com\unicauca\edu\co\openmarket\commons\domain\Category.class
