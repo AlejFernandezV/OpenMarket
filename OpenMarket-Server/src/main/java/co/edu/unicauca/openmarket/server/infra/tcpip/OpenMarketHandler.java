@@ -58,10 +58,13 @@ public class OpenMarketHandler extends ServerHandler{
                     response = processPostProduct(protocolRequest);
                 }
                 if(protocolRequest.getAction().equals("getall")){
-                    response = processGetProductAll(protocolRequest);
+                    response = processGetProductAll();
                 }
                 if(protocolRequest.getAction().equals("put")){
                     response = processPutProduct(protocolRequest);
+                }
+                if(protocolRequest.getAction().equals("delete")){
+                    response = processDeleteProduct(protocolRequest);
                 }
                 break;
                 
@@ -143,8 +146,22 @@ public class OpenMarketHandler extends ServerHandler{
             return objectToJSON(response);
         }
     }
+     
+    private String processDeleteProduct(Protocol protocolRequest) {
+        String id = protocolRequest.getParameters().get(0).getValue();
+        
+        
+        String response = serviceP.deleteProduct(Long.parseLong(id));
+        
+        if (response.isEmpty()) {
+            String errorJson = generateNotFoundProductErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
+    }
     
-    private String processGetProductAll(Protocol protocolRequest) {
+    private String processGetProductAll() {
         List<Product> products;
         products = serviceP.findAllProducts();
         return objectToJSON(products);
@@ -246,5 +263,5 @@ public class OpenMarketHandler extends ServerHandler{
      */
     public void setServiceC(CategoryService serviceC) {
         this.serviceC = serviceC;
-    } 
     }
+}
