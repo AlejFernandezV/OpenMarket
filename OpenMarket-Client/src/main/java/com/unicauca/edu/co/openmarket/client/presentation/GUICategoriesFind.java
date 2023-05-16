@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author william - alejandros
  */
-public class GUICategoriesFind extends javax.swing.JDialog {
+public class GUICategoriesFind extends javax.swing.JDialog implements Observador{
     private CategoryService categoryService;
     /**
      * Creates new form GUICategoriesFind
@@ -140,12 +140,7 @@ public class GUICategoriesFind extends javax.swing.JDialog {
         btnBuscarC.setText("Buscar");
         btnBuscarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnBuscarCActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                btnBuscarCActionPerformed(evt);
             }
         });
         pnlNorth.add(btnBuscarC);
@@ -153,12 +148,7 @@ public class GUICategoriesFind extends javax.swing.JDialog {
         btnBuscarTodoC.setText("Buscar Todos");
         btnBuscarTodoC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnBuscarTodoCActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                btnBuscarTodoCActionPerformed(evt);
             }
         });
         pnlNorth.add(btnBuscarTodoC);
