@@ -1,6 +1,7 @@
 package com.unicauca.edu.co.openmarket.client.presentation;
 
 
+import com.unicauca.edu.co.openmarket.client.access.Factory;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.domain.services.ProductService;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
@@ -13,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class GUIProducts extends javax.swing.JFrame {
 
+    private long contID = 0;
     private ProductAccessImplSockets productAccess;
     private boolean addOption;
 
@@ -21,7 +23,7 @@ public class GUIProducts extends javax.swing.JFrame {
      */
     public GUIProducts() {
         initComponents();
-        this.productAccess = productAccess;
+        productAccess = new ProductAccessImplSockets();
         stateInitial();
 
     }
@@ -345,9 +347,10 @@ public static void main(String args[]) {
 
     private void addProduct() throws Exception {
         Product product = new Product();
-        
+        this.contID ++;
         String name = txtName.getText().trim();
         String description = txtDescription.getText().trim();
+        product.setProductId(contID);
         product.setName(name);
         product.setDescription(description);
     

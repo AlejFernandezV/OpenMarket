@@ -18,7 +18,7 @@ import reloj.frameworkobsobs.Observador;
  *
  * @author Libardo Pantoja
  */
-public class GUIProductsFind extends javax.swing.JDialog implements Observador {
+public class GUIProductsFind extends javax.swing.JDialog{
     private ProductAccessImplSockets productAccess;
     /**
      * Creates new form GUIProductsFind
@@ -41,7 +41,7 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador {
         ));
     }
     
-        private void fillTable(List<Product> listProducts) {
+    private void fillTable(List<Product> listProducts) {
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
 
@@ -170,7 +170,7 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador {
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
-@Override
+
     public void actualizar() {
         try {
             fillTable(productAccess.findAll() );

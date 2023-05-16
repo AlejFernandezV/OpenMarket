@@ -71,7 +71,7 @@ public class ProductService {
         // Que no esté repetido
         Product productSearched = this.findProduct(product.getProductId());
         if (productSearched != null){
-            errors.add(new JsonError("400", "BAD_REQUEST","La categoría ya existe. "));
+            errors.add(new JsonError("400", "BAD_REQUEST","El producto ya existe. "));
         }
         
        if (!errors.isEmpty()) {
@@ -82,6 +82,15 @@ public class ProductService {
        
        
         return String.valueOf(repo.save(product));
+    }
+    
+    public synchronized List<Product> findAllProducts(){
+        List<Product> aux = repo.findAll();
+        
+        if(!aux.isEmpty()){
+            return aux;
+        }
+        return null;
     }
 
    

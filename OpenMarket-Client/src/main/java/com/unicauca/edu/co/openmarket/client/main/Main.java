@@ -20,7 +20,6 @@ public class Main {
         
         //IProductAccess access = Factory.getInstance().getProductService();
         ProductAccessImplSockets productAccess = new ProductAccessImplSockets();
-        
         GUIProducts instance = new GUIProducts();
         instance.setVisible(true);
         GUIProductsFind instance2 = new GUIProductsFind(null,false, productAccess);

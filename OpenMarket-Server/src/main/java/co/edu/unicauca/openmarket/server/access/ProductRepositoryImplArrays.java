@@ -19,9 +19,7 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     private static List<Product> products;
 
     public ProductRepositoryImplArrays() {
-        if (products == null){
-            products = new ArrayList();
-        }
+        products = new ArrayList<>();
         if (products.size() == 0){
             inicializar();
         }
@@ -29,29 +27,29 @@ public class ProductRepositoryImplArrays implements IProductRepository{
 
     public void inicializar() {
         Product product1 = new Product();
-        product1.setProductId(1L);
-        product1.setName("Producto 1");
-        product1.setDescription("Descripcion producto 1");
+        product1.setProductId(100L);
+        product1.setName("Producto 100");
+        product1.setDescription("Descripcion producto 100");
         
         Product product2 = new Product();
-        product2.setProductId(2L);
-        product2.setName("Producto 2");
-        product2.setDescription("Descripcion producto 2");
+        product2.setProductId(200L);
+        product2.setName("Producto 200");
+        product2.setDescription("Descripcion producto 200");
         
         Product product3 = new Product();
-        product3.setProductId(3L);
-        product3.setName("Producto 3");
-        product3.setDescription("Descripcion producto 3");
+        product3.setProductId(300L);
+        product3.setName("Producto 300");
+        product3.setDescription("Descripcion producto 300");
         
         Product product4 = new Product();
-        product4.setProductId(4L);
-        product4.setName("Producto 4");
-        product4.setDescription("Descripcion producto 4");
+        product4.setProductId(400L);
+        product4.setName("Producto 400");
+        product4.setDescription("Descripcion producto 400");
         
         Product product5 = new Product();
-        product5.setProductId(5L);
-        product5.setName("Producto 5");
-        product5.setDescription("Descripcion producto 5");
+        product5.setProductId(500L);
+        product5.setName("Producto 500");
+        product5.setDescription("Descripcion producto 500");
         
         products.add(product1);
         products.add(product2);
@@ -68,7 +66,11 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return true si se agregó con éxito, en caso contrario false.
     */
     public boolean save(Product newProduct) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(!newProduct.equals(null)){
+            products.add(newProduct);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -80,7 +82,12 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return true si se editó con éxito, en caso contrario false.
     */
     public boolean edit(Long id, Product product) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(int i=0; i < products.size(); i++){
+            if(products.get(i).getProductId().equals(id)){
+                products.set(i, product);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -91,7 +98,12 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return true si se elimina con éxito, en caso contrario false.
     */
     public boolean delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(int i=0; i < products.size(); i++){
+            if(products.get(i).getProductId().equals(id)){
+                products.remove(i);
+            }
+        }
+        return false;
     }
 
     @Override
@@ -102,7 +114,12 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return Objeto categoria encontrado por el Id.
     */
     public Product findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(Product p: products){
+            if(p.getProductId().equals(id)){
+                return p;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -113,7 +130,12 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return Objeto categoria encontrado por el nombre.
     */
     public Product findByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(Product p: products){
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
     }
     
     @Override
@@ -129,7 +151,7 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     * @return El arreglo de los productos
     */
     public List<Product> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return products;
     }
     
 }

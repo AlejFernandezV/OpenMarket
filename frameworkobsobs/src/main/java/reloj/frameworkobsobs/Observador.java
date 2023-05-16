@@ -2,14 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.edu.unicauca.openmarket.server.app;
+package reloj.frameworkobsobs;
 
 /**
  *
- * @author Alejandro
+ * @author ahurtado
  */
-public class OpenMarketApplication {
-    public static void main(String args[]){
-        
-    }
+public interface Observador {
+    public void actualizar();
 }
