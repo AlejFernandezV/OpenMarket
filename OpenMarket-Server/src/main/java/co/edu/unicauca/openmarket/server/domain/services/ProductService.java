@@ -42,10 +42,6 @@ public class ProductService {
         return repo.findById(id);
     }
     
-    public synchronized Product findByNameProduct(String name) {
-        return repo.findByName(name);
-    }
-
      /**
      * Buscar un producto
      *
