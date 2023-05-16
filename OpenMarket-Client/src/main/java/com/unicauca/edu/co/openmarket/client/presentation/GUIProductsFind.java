@@ -115,17 +115,17 @@ public class GUIProductsFind extends javax.swing.JDialog{
         pnlNorth.add(txtSearch);
 
         btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
         pnlNorth.add(btnSearch);
 
         btnSearchAll.setText("Buscar Todos");
         btnSearchAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnSearchAllActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                btnSearchAllActionPerformed(evt);
             }
         });
         pnlNorth.add(btnSearchAll);
@@ -152,6 +152,10 @@ public class GUIProductsFind extends javax.swing.JDialog{
     private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnSearchAllActionPerformed
         fillTable(productAccess.findAll());
     }//GEN-LAST:event_btnSearchAllActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+
+    }//GEN-LAST:event_btnSearchActionPerformed
 
  
 
