@@ -33,7 +33,7 @@ public class ProductService {
     }
 
     /**
-     * Buscar un cliente
+     * Buscar un producto
      *
      * @param id cedula
      * @return objeto tipo Customer
@@ -42,6 +42,16 @@ public class ProductService {
         return repo.findById(id);
     }
     
+    public synchronized Product findByNameProduct(String name) {
+        return repo.findByName(name);
+    }
+
+     /**
+     * Buscar un producto
+     *
+     * @param name nombre
+     * @return objeto tipo Product
+     */
     public synchronized Product findByNameProduct(String name) {
         return repo.findByName(name);
     }
