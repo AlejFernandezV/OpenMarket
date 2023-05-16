@@ -8,6 +8,7 @@ import com.unicauca.edu.co.openmarket.client.access.IProductAccess;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
+import reloj.frameworkobsobs.Observado;
 
 /**
  *
@@ -18,7 +19,7 @@ public class ProductService {
 
     /**
      * Constructor privado que evita que otros objetos instancien
-     * @param access implementacion de tipo ICustomerService
+     * @param access implementacion de tipo IProductAccess
      */
     public ProductService(IProductAccess access) {
         this.access = access;

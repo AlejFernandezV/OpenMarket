@@ -120,6 +120,7 @@ public class OpenMarketHandler extends ServerHandler{
         product.setDescription(protocolRequest.getParameters().get(2).getValue());
 
         String response = getServiceP().createProduct(product);
+        
         return response;
     }
     
@@ -246,4 +247,4 @@ public class OpenMarketHandler extends ServerHandler{
     public void setServiceC(CategoryService serviceC) {
         this.serviceC = serviceC;
     } 
-}
+    }

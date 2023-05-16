@@ -79,7 +79,7 @@ public class GUICategories extends javax.swing.JFrame {
         btnGrabarC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
-                    btnGrabarCActionPerformed(evt);
+                btnGrabarCActionPerformed(evt);
                 } catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

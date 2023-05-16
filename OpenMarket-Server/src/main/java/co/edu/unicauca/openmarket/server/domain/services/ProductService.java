@@ -88,7 +88,7 @@ public class ProductService {
             Gson gson = new Gson();
             String errorsJson = gson.toJson(errors);
             return errorsJson;
-        }             
+        }
         return String.valueOf(repo.save(product));
     }
     
