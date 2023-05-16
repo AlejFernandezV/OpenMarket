@@ -6,6 +6,8 @@ import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.domain.services.ProductService;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**

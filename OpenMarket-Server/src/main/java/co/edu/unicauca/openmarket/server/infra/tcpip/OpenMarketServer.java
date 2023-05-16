@@ -20,10 +20,6 @@ public class OpenMarketServer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("Ingrese el puerto de escucha");
-        int port = teclado.nextInt();
         ServerSocketMultiThread myServer = new ServerSocketMultiThread(5000);
         OpenMarketHandler myHandler = new OpenMarketHandler();
         myHandler.setServiceP(new ProductService(new ProductRepositoryImplArrays()));

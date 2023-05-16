@@ -115,17 +115,17 @@ public class GUIProductsFind extends javax.swing.JDialog{
         pnlNorth.add(txtSearch);
 
         btnSearch.setText("Buscar");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
         pnlNorth.add(btnSearch);
 
         btnSearchAll.setText("Buscar Todos");
         btnSearchAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnSearchAllActionPerformed(evt);
-                } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                btnSearchAllActionPerformed(evt);
             }
         });
         pnlNorth.add(btnSearchAll);
@@ -149,8 +149,46 @@ public class GUIProductsFind extends javax.swing.JDialog{
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
-    private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnSearchAllActionPerformed
-        fillTable(productAccess.findAll());
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
+        Object rowData[] = new Object[3];//No columnas
+        Product objProduct = null;
+        if(this.rdoId.isSelected()){
+            try {
+                objProduct = productAccess.findById(Long.parseLong(this.txtSearch.getText()));
+                
+                rowData[0] = objProduct.getProductId();
+                rowData[1] = objProduct.getName();
+                rowData[2] = objProduct.getDescription();
+                
+                model.addRow(rowData);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            try {
+                objProduct = productAccess.findByName(this.txtSearch.getText());
+                rowData[0] = objProduct.getProductId();
+                rowData[1] = objProduct.getName();
+                rowData[2] = objProduct.getDescription();
+                
+                model.addRow(rowData);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllActionPerformed
+        try {
+            fillTable(productAccess.findAll());
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSearchAllActionPerformed
 
  
