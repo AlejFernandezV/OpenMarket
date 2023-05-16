@@ -18,7 +18,7 @@ import reloj.frameworkobsobs.Observador;
  *
  * @author Libardo Pantoja
  */
-public class GUIProductsFind extends javax.swing.JDialog{
+public class GUIProductsFind extends javax.swing.JDialog implements Observador{
     private ProductAccessImplSockets productAccess;
     /**
      * Creates new form GUIProductsFind
@@ -208,7 +208,8 @@ public class GUIProductsFind extends javax.swing.JDialog{
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
-
+    
+    @Override
     public void actualizar() {
         try {
             fillTable(productAccess.findAll() );

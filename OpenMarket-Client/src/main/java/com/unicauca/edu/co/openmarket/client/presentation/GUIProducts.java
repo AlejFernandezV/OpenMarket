@@ -1,13 +1,11 @@
 package com.unicauca.edu.co.openmarket.client.presentation;
 
-
-import com.unicauca.edu.co.openmarket.client.access.Factory;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
-import com.unicauca.edu.co.openmarket.client.domain.services.ProductService;
+import com.unicauca.edu.co.openmarket.client.commands.OMAddProductCommand;
+import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
+import com.unicauca.edu.co.openmarket.client.infra.Messages;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +17,7 @@ public class GUIProducts extends javax.swing.JFrame {
     private long contID = 0;
     private ProductAccessImplSockets productAccess;
     private boolean addOption;
+    private OMInvoker ominvoker;
 
     /**
      * Creates new form GUIProducts
@@ -26,6 +25,7 @@ public class GUIProducts extends javax.swing.JFrame {
     public GUIProducts() {
         initComponents();
         productAccess = new ProductAccessImplSockets();
+        ominvoker = new OMInvoker();
         stateInitial();
 
     }
@@ -47,6 +47,7 @@ public class GUIProducts extends javax.swing.JFrame {
         btnEliminar = new javax.swing.JButton();
         btnFind = new javax.swing.JButton();
         btnCerrar = new javax.swing.JButton();
+        btnDeshacer = new javax.swing.JButton();
         pnlCenter = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
@@ -126,6 +127,14 @@ public class GUIProducts extends javax.swing.JFrame {
             }
         });
         pnlSouth.add(btnCerrar);
+
+        btnDeshacer.setText("Deshacer");
+        btnDeshacer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeshacerActionPerformed(evt);
+            }
+        });
+        pnlSouth.add(btnDeshacer);
 
         getContentPane().add(pnlSouth, java.awt.BorderLayout.SOUTH);
 
@@ -280,7 +289,16 @@ public static void main(String args[]) {
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
         GUIProductsFind instance = new GUIProductsFind(this, true, productAccess);
         instance.setVisible(true);
+        productAccess.addObservador(instance);
     }//GEN-LAST:event_btnFindActionPerformed
+
+    private void btnDeshacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeshacerActionPerformed
+        // TODO add your handling code here:
+        
+        ominvoker.unexecute();
+        if(!ominvoker.hasMoreCommands())
+            this.btnDeshacer.setVisible(false);
+    }//GEN-LAST:event_btnDeshacerActionPerformed
     private void stateEdit() {
         btnNuevo.setVisible(false);
         btnEditar.setVisible(false);
@@ -305,12 +323,14 @@ public static void main(String args[]) {
         txtId.setEnabled(false);
         txtName.setEnabled(false);
         txtDescription.setEnabled(false);
+        btnDeshacer.setVisible(ominvoker.hasMoreCommands());
 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnDeshacer;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnFind;
@@ -338,6 +358,7 @@ public static void main(String args[]) {
         txtId.setEnabled(false);
         txtName.setEnabled(true);
         txtDescription.setEnabled(true);
+        btnDeshacer.setVisible(ominvoker.hasMoreCommands());
 
     }
 
@@ -355,13 +376,16 @@ public static void main(String args[]) {
         product.setProductId(contID);
         product.setName(name);
         product.setDescription(description);
+        OMAddProductCommand comm= new OMAddProductCommand(product, productAccess);
+        ominvoker.addCommand(comm);
+        ominvoker.execute();
     
-        if (productAccess.save(product)) {
-            successMessage("Se grabó con éxito", "Atención");
+        if (comm.result()) {
+            Messages.successMessage("Se grabó con éxito", "Atención");
             cleanControls();
             stateInitial();
         } else {
-            successMessage("Error al grabar, lo siento mucho", "Atención");
+            Messages.successMessage("Error al grabar, lo siento mucho", "Atención");
         }
     }
 
@@ -378,11 +402,11 @@ public static void main(String args[]) {
         prod.setDescription(txtDescription.getText().trim());
 
         if (productAccess.edit(productId, prod)) {
-            successMessage("Se editó con éxito", "Atención");
+            Messages.successMessage("Se editó con éxito", "Atención");
             cleanControls();
             stateInitial();
         } else {
-            successMessage("Error al editar, lo siento mucho", "Atención");
+            Messages.successMessage("Error al editar, lo siento mucho", "Atención");
         }
     }
 }
