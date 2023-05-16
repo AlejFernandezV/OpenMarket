@@ -21,6 +21,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <exec.mainClass>com.unicauca.edu.co.openmarket.server.OpenMarketServer</exec.mainClass>
+        <exec.mainClass>com.unicauca.edu.co.openmarket.server.infra.tcpip.OpenMarketServer</exec.mainClass>
     </properties>
 </project>

@@ -184,8 +184,8 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 throw new Exception(extractMessages(jsonResponse));
             } else {
                 Type type = new TypeToken<List<Product>>() {}.getType();
-                List<Product> categories = new Gson().fromJson(jsonResponse, type);
-                return categories;
+                List<Product> products = new Gson().fromJson(jsonResponse, type);
+                return products;
             }
         }
     }
@@ -197,6 +197,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         protocol.setAction("post");
         protocol.addParameter("id", product.getProductId().toString());
         protocol.addParameter("name", product.getName());
+        protocol.addParameter("description", product.getDescription());
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
