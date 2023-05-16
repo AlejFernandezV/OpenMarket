@@ -2,7 +2,6 @@
 package com.unicauca.edu.co.openmarket.client.domain.services;
 
 import com.unicauca.edu.co.openmarket.client.domain.User;
-import com.unicauca.edu.co.openmarket.client.presentation.GUICategories;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProducts;
 
 /**
@@ -22,12 +21,6 @@ public class UserService {
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
                     new GUIProducts().setVisible(true);
-                }
-            });
-        }else if (login == "category"){
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new GUICategories().setVisible(true);
                 }
             });
         }
