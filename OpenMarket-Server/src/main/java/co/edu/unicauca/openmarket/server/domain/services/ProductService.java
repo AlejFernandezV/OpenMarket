@@ -33,13 +33,23 @@ public class ProductService {
     }
 
     /**
-     * Buscar un cliente
+     * Buscar un producto
      *
      * @param id cedula
      * @return objeto tipo Customer
      */
-    public synchronized Product findProduct(long id) {
+    public synchronized Product findByIdProduct(long id) {
         return repo.findById(id);
+    }
+
+     /**
+     * Buscar un producto
+     *
+     * @param name nombre
+     * @return objeto tipo Product
+     */
+    public synchronized Product findByNameProduct(String name) {
+        return repo.findByName(name);
     }
 
     /**
@@ -69,7 +79,7 @@ public class ProductService {
         }
         
         // Que no esté repetido
-        Product productSearched = this.findProduct(product.getProductId());
+        Product productSearched = this.findByIdProduct(product.getProductId());
         if (productSearched != null){
             errors.add(new JsonError("400", "BAD_REQUEST","El producto ya existe. "));
         }

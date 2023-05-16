@@ -24,7 +24,7 @@ public class OpenMarketServer {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Ingrese el puerto de escucha");
         int port = teclado.nextInt();
-        ServerSocketMultiThread myServer = new ServerSocketMultiThread(port);
+        ServerSocketMultiThread myServer = new ServerSocketMultiThread(5000);
         OpenMarketHandler myHandler = new OpenMarketHandler();
         myHandler.setServiceP(new ProductService(new ProductRepositoryImplArrays()));
         myHandler.setServiceC(new CategoryService(new CategoryRepositoryImplArrays()));

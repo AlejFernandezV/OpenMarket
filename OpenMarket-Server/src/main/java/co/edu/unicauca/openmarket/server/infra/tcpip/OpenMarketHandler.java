@@ -86,13 +86,22 @@ public class OpenMarketHandler extends ServerHandler{
      */
     private String processGetProduct(Protocol protocolRequest) {
         // Extraer la cedula del primer parámetro
-        String id = protocolRequest.getParameters().get(0).getValue();
-        Product customer = serviceP.findProduct(Long.parseLong(id));
-        if (customer == null) {
+        String parameter = protocolRequest.getParameters().get(0).getName();
+        String value = protocolRequest.getParameters().get(0).getValue();
+        Product product = null;
+        switch(parameter){
+            case "id":
+                product = serviceP.findByIdProduct(Long.parseLong(value));
+                break;
+            case "name":
+                product = serviceP.findByNameProduct(value);
+                break;
+        }
+        if (product == null) {
             String errorJson = generateNotFoundProductErrorJson();
             return errorJson;
         } else {
-            return objectToJSON(customer);
+            return objectToJSON(product);
         }
     }
 
