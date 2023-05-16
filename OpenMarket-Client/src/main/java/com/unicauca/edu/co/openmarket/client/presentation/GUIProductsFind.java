@@ -18,7 +18,7 @@ import reloj.frameworkobsobs.Observador;
  *
  * @author Libardo Pantoja
  */
-public class GUIProductsFind extends javax.swing.JDialog{
+public class GUIProductsFind extends javax.swing.JDialog implements Observador{
     private ProductAccessImplSockets productAccess;
     /**
      * Creates new form GUIProductsFind
