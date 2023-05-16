@@ -119,7 +119,26 @@ public class ProductService {
         } 
         
         return String.valueOf(repo.edit(id, product));
-    } 
+    }
+    
+    public synchronized String deleteProduct(Long id){
+        List<JsonError> errors = new ArrayList<>();
+        
+        Product product = repo.findById(id);
+        
+        // Validaciones y reglas de negocio
+        if (product.equals(null)) {
+           errors.add(new JsonError("400", "BAD_REQUEST","Producto no encontrado. "));
+        }
+        
+        if (!errors.isEmpty()) {
+            Gson gson = new Gson();
+            String errorsJson = gson.toJson(errors);
+            return errorsJson;
+        } 
+        
+        return String.valueOf(repo.delete(product.getProductId()));
+    }
     
     public synchronized List<Product> findAllProducts(){
         List<Product> aux = repo.findAll();
