@@ -38,8 +38,12 @@ public class ProductService {
      * @param id cedula
      * @return objeto tipo Customer
      */
-    public synchronized Product findProduct(long id) {
+    public synchronized Product findByIdProduct(long id) {
         return repo.findById(id);
+    }
+    
+    public synchronized Product findByNameProduct(String name) {
+        return repo.findByName(name);
     }
 
     /**
@@ -69,7 +73,7 @@ public class ProductService {
         }
         
         // Que no esté repetido
-        Product productSearched = this.findProduct(product.getProductId());
+        Product productSearched = this.findByIdProduct(product.getProductId());
         if (productSearched != null){
             errors.add(new JsonError("400", "BAD_REQUEST","El producto ya existe. "));
         }
@@ -79,10 +83,37 @@ public class ProductService {
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         }             
-       
-       
         return String.valueOf(repo.save(product));
     }
+    
+    public synchronized String editProduct(Long id, Product product){
+        List<JsonError> errors = new ArrayList<>();
+  
+        // Validaciones y reglas de negocio
+        if (product.getProductId().equals(null) || product.getName().isEmpty() || product.getDescription().isEmpty()) {
+           errors.add(new JsonError("400", "BAD_REQUEST","Id, nombre y descripcion son obligatorios. "));
+        }
+        
+        if (product.getProductId() < 0){
+            errors.add(new JsonError("400", "BAD_REQUEST","El id de categoria no puede ser negativo. "));
+        }
+
+        if(!Utilities.isNumeric(product.getProductId().toString())){
+            errors.add(new JsonError("400", "BAD_REQUEST","El id debe contener sólo dígitos "));
+        }
+        
+        if(Utilities.isNumeric(product.getDescription())){
+            errors.add(new JsonError("400", "BAD_REQUEST","La descripcion del producto debe contener sólo letras "));
+        }
+        
+        if (!errors.isEmpty()) {
+            Gson gson = new Gson();
+            String errorsJson = gson.toJson(errors);
+            return errorsJson;
+        } 
+        
+        return String.valueOf(repo.edit(id, product));
+    } 
     
     public synchronized List<Product> findAllProducts(){
         List<Product> aux = repo.findAll();

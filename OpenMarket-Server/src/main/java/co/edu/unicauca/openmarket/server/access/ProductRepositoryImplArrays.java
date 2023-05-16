@@ -85,6 +85,7 @@ public class ProductRepositoryImplArrays implements IProductRepository{
         for(int i=0; i < products.size(); i++){
             if(products.get(i).getProductId().equals(id)){
                 products.set(i, product);
+                return true;
             }
         }
         return false;

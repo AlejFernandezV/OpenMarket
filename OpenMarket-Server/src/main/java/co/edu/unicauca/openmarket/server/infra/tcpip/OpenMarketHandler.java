@@ -60,6 +60,9 @@ public class OpenMarketHandler extends ServerHandler{
                 if(protocolRequest.getAction().equals("getall")){
                     response = processGetProductAll(protocolRequest);
                 }
+                if(protocolRequest.getAction().equals("put")){
+                    response = processPutProduct(protocolRequest);
+                }
                 break;
                 
             case "category":
@@ -85,14 +88,22 @@ public class OpenMarketHandler extends ServerHandler{
      * @param protocolRequest Protocolo de la solicitud
      */
     private String processGetProduct(Protocol protocolRequest) {
-        // Extraer la cedula del primer parámetro
-        String id = protocolRequest.getParameters().get(0).getValue();
-        Product customer = serviceP.findProduct(Long.parseLong(id));
-        if (customer == null) {
+        String parameter = protocolRequest.getParameters().get(0).getName();
+        String value = protocolRequest.getParameters().get(0).getValue();
+        Product product = null;
+        switch(parameter){
+            case "id":
+                product = serviceP.findByIdProduct(Long.parseLong(value));
+                break;
+            case "name":
+                product = serviceP.findByNameProduct(value);
+                break;
+        }
+        if (product == null) {
             String errorJson = generateNotFoundProductErrorJson();
             return errorJson;
         } else {
-            return objectToJSON(customer);
+            return objectToJSON(product);
         }
     }
 
@@ -110,6 +121,26 @@ public class OpenMarketHandler extends ServerHandler{
 
         String response = getServiceP().createProduct(product);
         return response;
+    }
+    
+     private String processPutProduct(Protocol protocolRequest) {
+        
+        String id = protocolRequest.getParameters().get(0).getValue();
+        String name = protocolRequest.getParameters().get(1).getValue();
+        String description = protocolRequest.getParameters().get(2).getValue();
+        Product product = serviceP.findByIdProduct(Long.parseLong(id));
+        
+        product.setName(name);
+        product.setDescription(description);
+        
+        String response = serviceP.editProduct(Long.parseLong(id), product);
+        
+        if (product == null) {
+            String errorJson = generateNotFoundProductErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
     }
     
     private String processGetProductAll(Protocol protocolRequest) {

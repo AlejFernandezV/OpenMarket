@@ -152,7 +152,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
-                //Encontró la categoría
+                //Encontró el producto
                 Product product = jsonToProduct(jsonResponse);
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
                 return product;
@@ -209,9 +209,9 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         Protocol protocol = new Protocol();
         protocol.setResource("product");
         protocol.setAction("put");
-        protocol.addParameter("id", product.getProductId().toString());
+        protocol.addParameter("id", Id.toString());
         protocol.addParameter("name", product.getName());
-
+        protocol.addParameter("description", product.getDescription());
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
         return requestJson;
@@ -254,7 +254,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         Protocol protocol = new Protocol();
         protocol.setResource("product");
         protocol.setAction("get");
-        protocol.addParameter("id", name);
+        protocol.addParameter("name", name);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
