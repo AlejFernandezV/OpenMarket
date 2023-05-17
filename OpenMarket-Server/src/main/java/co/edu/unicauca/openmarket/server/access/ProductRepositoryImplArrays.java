@@ -7,12 +7,13 @@ package co.edu.unicauca.openmarket.server.access;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
+import reloj.frameworkobsobs.Observado;
 
 /**
  *
  * @author Alejandro
  */
-public class ProductRepositoryImplArrays implements IProductRepository{
+public class ProductRepositoryImplArrays extends Observado implements IProductRepository{
     /**
      * Array List de productos
      */
@@ -68,6 +69,7 @@ public class ProductRepositoryImplArrays implements IProductRepository{
     public boolean save(Product newProduct) {
         if(!newProduct.equals(null)){
             products.add(newProduct);
+            this.notificar();
             return true;
         }
         return false;
@@ -85,6 +87,7 @@ public class ProductRepositoryImplArrays implements IProductRepository{
         for(int i=0; i < products.size(); i++){
             if(products.get(i).getProductId().equals(id)){
                 products.set(i, product);
+                this.notificar();
                 return true;
             }
         }
@@ -102,6 +105,8 @@ public class ProductRepositoryImplArrays implements IProductRepository{
         for(int i=0; i < products.size(); i++){
             if(products.get(i).getProductId().equals(id)){
                 products.remove(i);
+                this.notificar();
+                return true;
             }
         }
         return false;

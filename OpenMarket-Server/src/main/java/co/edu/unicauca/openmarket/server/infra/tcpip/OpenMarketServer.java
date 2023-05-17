@@ -26,5 +26,6 @@ public class OpenMarketServer {
         myHandler.setServiceC(new CategoryService(new CategoryRepositoryImplArrays()));
         myServer.setServerHandler(myHandler);
         myServer.startServer();
+        myHandler.getServiceP().addObservador(myHandler);
     }
 }

@@ -24,7 +24,7 @@ public class Main {
         instance.setVisible(true);
         GUIProductsFind instance2 = new GUIProductsFind(null,false, productAccess);
         instance2.setVisible(true);
-        //productAccess.addObservador(instance2);
+        productAccess.addObservador(instance2);
     }
     
 }

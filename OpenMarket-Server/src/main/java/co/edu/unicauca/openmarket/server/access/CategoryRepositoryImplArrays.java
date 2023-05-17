@@ -7,12 +7,13 @@ package co.edu.unicauca.openmarket.server.access;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.ArrayList;
 import java.util.List;
+import reloj.frameworkobsobs.Observado;
 
 /**
  *
  * @author Alejandro
  */
-public class CategoryRepositoryImplArrays implements ICategoryRepository{
+public class CategoryRepositoryImplArrays extends Observado implements ICategoryRepository{
     /**
      * Array List de clientes
      */
