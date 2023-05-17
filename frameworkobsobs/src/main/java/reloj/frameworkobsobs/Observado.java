@@ -12,12 +12,9 @@ import java.util.List;
  * @author ahurtado
  */
 public class Observado {
-    List<Observador> misObservadores=null;
+    List<Observador> misObservadores = new ArrayList<>();
     
     public void addObservador(Observador one){
-        if(misObservadores==null){
-            misObservadores = new ArrayList<>();
-        }
         misObservadores.add(one);
     }
     

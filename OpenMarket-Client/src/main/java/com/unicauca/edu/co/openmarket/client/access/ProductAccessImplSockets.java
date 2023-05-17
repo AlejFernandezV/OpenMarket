@@ -50,6 +50,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
+                this.notificar();
                 return true;
             }
         }
@@ -75,6 +76,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 return false;
             } else {
+                this.notificar();
                 return true;
             }
         } 
@@ -99,6 +101,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
+                this.notificar();
                 return true;
             }
         }

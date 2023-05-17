@@ -12,12 +12,13 @@ import com.google.gson.Gson;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
+import reloj.frameworkobsobs.Observado;
 
 /**
  *
  * @author Alejandro
  */
-public class ProductService {
+public class ProductService extends Observado{
     /**
      * Repositorio de clientes
      */
@@ -89,7 +90,8 @@ public class ProductService {
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         }
-        return String.valueOf(repo.save(product));
+       this.notificar();
+       return String.valueOf(repo.save(product));
     }
     
     public synchronized String editProduct(Long id, Product product){
@@ -117,7 +119,7 @@ public class ProductService {
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         } 
-        
+        this.notificar();
         return String.valueOf(repo.edit(id, product));
     }
     
@@ -136,7 +138,7 @@ public class ProductService {
             String errorsJson = gson.toJson(errors);
             return errorsJson;
         } 
-        
+        this.notificar();
         return String.valueOf(repo.delete(product.getProductId()));
     }
     

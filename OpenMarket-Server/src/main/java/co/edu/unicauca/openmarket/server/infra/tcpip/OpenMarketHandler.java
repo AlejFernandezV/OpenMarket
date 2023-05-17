@@ -14,12 +14,13 @@ import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.commons.infra.Protocol;
 import java.util.ArrayList;
 import java.util.List;
+import reloj.frameworkobsobs.Observador;
 
 /**
  *
  * @author Alejandro
  */
-public class OpenMarketHandler extends ServerHandler{
+public class OpenMarketHandler extends ServerHandler implements Observador{
      /**
      * Servicio de clientes
      */
@@ -81,6 +82,7 @@ public class OpenMarketHandler extends ServerHandler{
                 }
                 break;
         }
+        this.actualizar();
         return response;
 
     }
@@ -148,8 +150,7 @@ public class OpenMarketHandler extends ServerHandler{
     }
      
     private String processDeleteProduct(Protocol protocolRequest) {
-        String id = protocolRequest.getParameters().get(0).getValue();
-        
+        String id = protocolRequest.getParameters().get(0).getValue(); 
         
         String response = serviceP.deleteProduct(Long.parseLong(id));
         
@@ -263,5 +264,10 @@ public class OpenMarketHandler extends ServerHandler{
      */
     public void setServiceC(CategoryService serviceC) {
         this.serviceC = serviceC;
+    }
+
+    @Override
+    public void actualizar() {
+        serviceP.findAllProducts();
     }
 }
