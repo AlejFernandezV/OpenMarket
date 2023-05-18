@@ -21,10 +21,11 @@ public class Main {
         //IProductAccess access = Factory.getInstance().getProductService();
         ProductAccessImplSockets productAccess = new ProductAccessImplSockets();
         GUIProducts instance = new GUIProducts();
+        instance.setProductAccess(productAccess);
         instance.setVisible(true);
         GUIProductsFind instance2 = new GUIProductsFind(null,false, productAccess);
-        instance2.setVisible(true);
         productAccess.addObservador(instance2);
+        instance2.setVisible(true);
     }
     
 }

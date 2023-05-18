@@ -30,6 +30,14 @@ public class GUIProducts extends javax.swing.JFrame {
 
     }
 
+    public ProductAccessImplSockets getProductAccess() {
+        return productAccess;
+    }
+
+    public void setProductAccess(ProductAccessImplSockets productAccess) {
+        this.productAccess = productAccess;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
