@@ -1,7 +1,10 @@
 
 package com.unicauca.edu.co.openmarket.client.main;
 
+import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.presentation.GUICategories;
+import com.unicauca.edu.co.openmarket.client.presentation.GUICategoriesFind;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProducts;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProductsFind;
 
@@ -26,6 +29,14 @@ public class Main {
         GUIProductsFind instance2 = new GUIProductsFind(null,false, productAccess);
         productAccess.addObservador(instance2);
         instance2.setVisible(true);
+        
+        CategoryAccessImplSockets categoryAccess = new CategoryAccessImplSockets();
+        GUICategories instancec = new GUICategories();
+        instancec.setCategoryAccess(categoryAccess);
+        instancec.setVisible(true);
+        GUICategoriesFind instance3 = new GUICategoriesFind(null,false, categoryAccess);
+        categoryAccess.addObservador(instance2);
+        instance3.setVisible(true);
     }
     
 }
