@@ -2,6 +2,7 @@ package com.unicauca.edu.co.openmarket.client.commands;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ public class OMAddCategoryCommand extends OMCommand {
         try {
             result = cA.saveC(cC);
         } catch (Exception ex) {
-            Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OMAddCategoryCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -32,14 +33,14 @@ public class OMAddCategoryCommand extends OMCommand {
         try {
             categories = cA.findAllC();
         } catch (Exception ex) {
-            Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OMAddCategoryCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for(Category each: categories){
-            if(each.getName().equals(cC.getName())){
+        for (Category eachC : categories) {
+            if(eachC.getName().equals(cC.getName())){
                 try {
-                    result = cA.deleteC(each.getCategoryId());
+                    result = cA.deleteC(eachC.getCategoryId());
                 } catch (Exception ex) {
-                    Logger.getLogger(OMAddProductCommand.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(OMAddCategoryCommand.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

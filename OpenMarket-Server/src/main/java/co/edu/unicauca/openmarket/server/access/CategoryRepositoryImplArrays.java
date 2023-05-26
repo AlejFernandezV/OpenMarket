@@ -20,11 +20,8 @@ public class CategoryRepositoryImplArrays extends Observado implements ICategory
     private static List<Category> categories;
 
     public CategoryRepositoryImplArrays() {
-        if (categories == null){
-            categories = new ArrayList();
-        }
-        
-        if (categories.size() == 0){
+        categories = new ArrayList<>();
+        if (categories.size() == 0) {
             inicializar();
         }
     }

@@ -31,11 +31,11 @@ public class Main {
         instance2.setVisible(true);
         
         CategoryAccessImplSockets categoryAccess = new CategoryAccessImplSockets();
-        GUICategories instancec = new GUICategories();
-        instancec.setCategoryAccess(categoryAccess);
-        instancec.setVisible(true);
+        GUICategories instanceC = new GUICategories();
+        instanceC.setCategoryAccess(categoryAccess);
+        instanceC.setVisible(true);
         GUICategoriesFind instance3 = new GUICategoriesFind(null,false, categoryAccess);
-        categoryAccess.addObservador(instance2);
+        categoryAccess.addObservador(instance3);
         instance3.setVisible(true);
     }
     

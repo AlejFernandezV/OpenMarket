@@ -38,8 +38,6 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
      * "{"resource":"customer","action":"get","parameters":[{"name":"id","value":"1"}]}"
      *
      */
-   
-    
     @Override
     public String processRequest(String requestJson) {
         // Convertir la solicitud a objeto Protocol para poderlo procesar
@@ -71,14 +69,20 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
                 
             case "category":
                 if (protocolRequest.getAction().equals("get")) {
-                    // Consultar un customer
                     response = processGetCategory(protocolRequest);
                 }
 
-                if (protocolRequest.getAction().equals("post")) {
-                    // Agregar un customer    
+                if (protocolRequest.getAction().equals("post")) {   
                     response = processPostCategory(protocolRequest);
-
+                }
+                if(protocolRequest.getAction().equals("getall")){
+                    response = processGetCategoryAll();
+                }
+                if(protocolRequest.getAction().equals("put")){
+                    response = processPutCategory(protocolRequest);
+                }
+                if(protocolRequest.getAction().equals("delete")){
+                    response = processDeleteCategory(protocolRequest);
                 }
                 break;
         }
@@ -112,6 +116,25 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         }
     }
 
+    private String processGetCategory(Protocol protocolRequest) {
+        String parameter = protocolRequest.getParameters().get(0).getName();
+        String value = protocolRequest.getParameters().get(0).getValue();
+        Category category = null;
+        switch(parameter){
+            case "id":
+                category = serviceC.findByIdCategory(Long.parseLong(value));
+                break;
+            case "name":
+                category = serviceC.findByNameCategory(value);
+                break;
+        }
+        if (category == null) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(category);
+        }
+    }
     /**
      * Procesa la solicitud de agregar un producto
      *
@@ -125,6 +148,17 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         product.setDescription(protocolRequest.getParameters().get(2).getValue());
 
         String response = getServiceP().createProduct(product);
+        
+        return response;
+    }
+    
+    private String processPostCategory(Protocol protocolRequest) {
+        Category category = new Category();
+        // Reconstruir el customer a partid de lo que viene en los parámetros
+        category.setCategoryId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
+        category.setName(protocolRequest.getParameters().get(1).getValue());
+
+        String response = getServiceC().createCategory(category);
         
         return response;
     }
@@ -149,6 +183,24 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         }
     }
      
+    private String processPutCategory(Protocol protocolRequest) {
+        
+        String id = protocolRequest.getParameters().get(0).getValue();
+        String name = protocolRequest.getParameters().get(1).getValue();
+        Category category = serviceC.findByIdCategory(Long.parseLong(id));
+        
+        category.setName(name);
+        
+        String response = serviceC.editCategory(Long.parseLong(id), category);
+        
+        if (category == null) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
+    }
+    
     private String processDeleteProduct(Protocol protocolRequest) {
         String id = protocolRequest.getParameters().get(0).getValue(); 
         
@@ -162,10 +214,29 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         }
     }
     
+    private String processDeleteCategory(Protocol protocolRequest) {
+        String id = protocolRequest.getParameters().get(0).getValue(); 
+        
+        String response = serviceC.deleteCategory(Long.parseLong(id));
+        
+        if (response.isEmpty()) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
+    }
+    
     private String processGetProductAll() {
         List<Product> products;
         products = serviceP.findAllProducts();
         return objectToJSON(products);
+    }
+    
+    private String processGetCategoryAll() {
+        List<Category> categories;
+        categories = serviceC.findAllCategories();
+        return objectToJSON(categories);
     }
 
     /**
@@ -186,38 +257,7 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
 
         return errorsJson;
     }
-    
-    /**
-     * Procesa la solicitud de consultar un producto
-     *
-     * @param protocolRequest Protocolo de la solicitud
-     */
-    private String processGetCategory(Protocol protocolRequest) {
-        // Extraer la cedula del primer parámetro
-        String id = protocolRequest.getParameters().get(0).getValue();
-        Category customer = serviceC.findCategory(Long.parseLong(id));
-        if (customer == null) {
-            String errorJson = generateNotFoundCategoryErrorJson();
-            return errorJson;
-        } else {
-            return objectToJSON(customer);
-        }
-    }
 
-    /**
-     * Procesa la solicitud de agregar un producto
-     *
-     * @param protocolRequest Protocolo de la solicitud
-     */
-    private String processPostCategory(Protocol protocolRequest) {
-        Category category = new Category();
-        // Reconstruir el customer a partid de lo que viene en los parámetros
-        category.setCategoryId(Long.parseLong(protocolRequest.getParameters().get(0).getValue()));
-        category.setName(protocolRequest.getParameters().get(1).getValue());
-
-        String response = getServiceC().createCategory(category);
-        return response;
-    }
 
     /**
      * Genera un ErrorJson de producto no encontrado
@@ -269,5 +309,6 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
     @Override
     public void actualizar() {
         serviceP.findAllProducts();
+        serviceC.findAllCategories();
     }
 }

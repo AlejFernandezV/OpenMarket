@@ -32,15 +32,15 @@ public class GUICategories extends javax.swing.JFrame {
         ominvoker = new OMInvoker();
         stateInitial();
     }
-    
+
     public CategoryAccessImplSockets getCategoryAccess() {
         return categoryAccess;
     }
 
-    public void setCategoryAccess(CategoryAccessImplSockets productAccess) {
-        this.categoryAccess = productAccess;
+    public void setCategoryAccess(CategoryAccessImplSockets categoryAccess) {
+        this.categoryAccess = categoryAccess;
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

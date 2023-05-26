@@ -4,7 +4,6 @@ package com.unicauca.edu.co.openmarket.client.controller;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddProductCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
-import com.unicauca.edu.co.openmarket.client.domain.services.ProductService;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 
 /**

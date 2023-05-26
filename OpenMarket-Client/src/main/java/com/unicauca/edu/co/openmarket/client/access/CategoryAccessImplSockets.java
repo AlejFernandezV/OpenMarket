@@ -209,7 +209,7 @@ public class CategoryAccessImplSockets extends Observado implements ICategoryAcc
         Protocol protocol = new Protocol();
         protocol.setResource("category");
         protocol.setAction("put");
-        protocol.addParameter("id", category.getCategoryId().toString());
+        protocol.addParameter("id", categoryId.toString());
         protocol.addParameter("name", category.getName());
 
         Gson gson = new Gson();

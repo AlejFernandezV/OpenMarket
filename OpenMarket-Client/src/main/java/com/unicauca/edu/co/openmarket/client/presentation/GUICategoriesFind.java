@@ -52,17 +52,6 @@ public class GUICategoriesFind extends javax.swing.JDialog implements Observador
         }
     }
     
-    private void fillTableOneCategorie(Category objCategory){
-        initializeTable();
-        DefaultTableModel modelC = (DefaultTableModel) tblCategories.getModel();
-
-        Object rowData[] = new Object[3];//No columnas
-        
-        rowData[0] = objCategory.getCategoryId();
-        rowData[1] = objCategory.getName();
-        
-        modelC.addRow(rowData);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,7 +167,7 @@ public class GUICategoriesFind extends javax.swing.JDialog implements Observador
     private void btnBuscarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCActionPerformed
         // TODO add your handling code here:
         initializeTable();
-        DefaultTableModel model = (DefaultTableModel) tblCategories.getModel();
+        DefaultTableModel modelC = (DefaultTableModel) tblCategories.getModel();
         Object rowData[] = new Object[3];//No columnas
         Category objCategory = null;
         if (this.rdIdC.isSelected()) {
@@ -188,22 +177,24 @@ public class GUICategoriesFind extends javax.swing.JDialog implements Observador
                 rowData[0] = objCategory.getCategoryId();
                 rowData[1] = objCategory.getName();
 
-                model.addRow(rowData);
+                modelC.addRow(rowData);
             } catch (Exception ex) {
                 Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        } else {
+        } else if (this.rdNombreC.isSelected()) {
             try {
 
                 objCategory = categoryAccess.findByNameC(this.txtBusquedaC.getText());
                 rowData[0] = objCategory.getCategoryId();
                 rowData[1] = objCategory.getName();
 
-                model.addRow(rowData);
+                modelC.addRow(rowData);
             } catch (Exception ex) {
                 Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else {
+            System.out.print("Error!");
         }
     }//GEN-LAST:event_btnBuscarCActionPerformed
 

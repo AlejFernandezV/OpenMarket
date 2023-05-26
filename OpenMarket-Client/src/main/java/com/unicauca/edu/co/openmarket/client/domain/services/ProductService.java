@@ -8,7 +8,6 @@ import com.unicauca.edu.co.openmarket.client.access.IProductAccess;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
-import reloj.frameworkobsobs.Observado;
 
 /**
  *
@@ -49,7 +48,7 @@ public class ProductService {
 
     public List<Product> findAllProducts() throws Exception {
         List<Product> products = new ArrayList<>();
-        products = access.findAll();;
+        products = access.findAll();
 
         return products;
     }

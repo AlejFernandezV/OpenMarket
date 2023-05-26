@@ -3,10 +3,8 @@ package com.unicauca.edu.co.openmarket.client.controller;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddCategoryCommand;
-import com.unicauca.edu.co.openmarket.client.commands.OMAddProductCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
-import com.unicauca.edu.co.openmarket.commons.domain.Product;
 
 /**
  *
