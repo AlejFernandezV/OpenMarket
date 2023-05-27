@@ -1,7 +1,7 @@
 
 package com.unicauca.edu.co.openmarket.client.infra;
 
-import com.unicauca.edu.co.openmarket.client.domain.User;
+import com.unicauca.edu.co.openmarket.commons.domain.User;
 
 /**
  * Esta pendiente implementar esta clase. Tendra la responsabilidad de cosas

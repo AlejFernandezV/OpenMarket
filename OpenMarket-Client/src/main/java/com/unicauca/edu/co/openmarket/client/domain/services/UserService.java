@@ -1,8 +1,8 @@
 
 package com.unicauca.edu.co.openmarket.client.domain.services;
 
-import com.unicauca.edu.co.openmarket.client.domain.User;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProducts;
+import com.unicauca.edu.co.openmarket.commons.domain.User;
 
 /**
  * Servicio de usuarios del sistema

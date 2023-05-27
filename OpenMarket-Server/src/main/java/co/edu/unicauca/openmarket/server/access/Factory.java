@@ -80,4 +80,29 @@ public class Factory {
 
         return result;
     }
+    
+    /**
+     * Método que crea una instancia concreta de la jerarquia
+     * IUserRepository
+     *
+     * @return una clase hija de la abstracción IUserRepository
+     */
+    public IUserRepository getUserRepository() {
+        String type = Utilities.loadProperty("user.repository");
+        if (type.isEmpty()) {
+            type = "default";
+        }
+        IUserRepository result = null;
+
+        switch (type) {
+            case "default":
+                result = new UserRepositoryImplArrays();
+                break;
+            case "mysql":
+                result = new UserRepositoryImplMysql();
+                break;
+        }
+
+        return result;
+    }
 }

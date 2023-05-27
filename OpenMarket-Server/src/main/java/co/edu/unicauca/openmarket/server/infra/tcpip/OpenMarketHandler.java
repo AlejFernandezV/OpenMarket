@@ -6,6 +6,7 @@ package co.edu.unicauca.openmarket.server.infra.tcpip;
 
 import co.edu.unicauca.openmarket.server.domain.services.CategoryService;
 import co.edu.unicauca.openmarket.server.domain.services.ProductService;
+import co.edu.unicauca.openmarket.server.domain.services.UserService;
 import co.unicauca.strategyserver.helpers.JsonError;
 import co.unicauca.strategyserver.infra.ServerHandler;
 import com.google.gson.Gson;
@@ -26,6 +27,7 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
      */
     private static ProductService serviceP;
     private static CategoryService serviceC;
+    private static UserService serviceU;
 
     public OpenMarketHandler() {
     }
@@ -305,10 +307,17 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
     public void setServiceC(CategoryService serviceC) {
         this.serviceC = serviceC;
     }
+    
+    //TO DO
+    /*
+        - PROCESAR LOS REQUEST PARA LOS USUARIOS
+        - GETTER Y SETTER PARA EL SERVCICIO DE USUARIO
+    */
 
     @Override
     public void actualizar() {
         serviceP.findAllProducts();
         serviceC.findAllCategories();
+        serviceU.findAllUsers();
     }
 }

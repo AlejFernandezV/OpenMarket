@@ -20,7 +20,7 @@ import reloj.frameworkobsobs.Observado;
  */
 public class ProductService extends Observado{
     /**
-     * Repositorio de clientes
+     * Repositorio de productos
      */
     IProductRepository repo;
 
