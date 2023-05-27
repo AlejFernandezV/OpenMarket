@@ -381,9 +381,11 @@ public static void main(String args[]) {
         this.contID ++;
         String name = txtName.getText().trim();
         String description = txtDescription.getText().trim();
+        
         product.setProductId(contID);
         product.setName(name);
         product.setDescription(description);
+        
         OMAddProductCommand comm= new OMAddProductCommand(product, productAccess);
         ominvoker.addCommand(comm);
         ominvoker.execute();

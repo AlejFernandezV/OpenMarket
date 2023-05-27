@@ -6,7 +6,6 @@
 package com.unicauca.edu.co.openmarket.client.presentation;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
-import com.unicauca.edu.co.openmarket.client.domain.services.ProductService;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.List;
 import java.util.logging.Level;
@@ -28,7 +27,6 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
         initComponents();
         initializeTable();
         this.productAccess = productAccess;
-        //this.productService = productService;
         setLocationRelativeTo(null); //centrar al ventana
     }
     

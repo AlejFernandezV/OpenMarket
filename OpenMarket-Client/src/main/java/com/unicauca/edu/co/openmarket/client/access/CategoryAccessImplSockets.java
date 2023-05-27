@@ -15,12 +15,13 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import reloj.frameworkobsobs.Observado;
 
 /**
  *
  * @author Personal
  */
-public class CategoryAccessImplSockets implements ICategoryAccess {
+public class CategoryAccessImplSockets extends Observado implements ICategoryAccess {
    
      /**
      * El servicio utiliza un socket para comunicarse con la aplicación server
@@ -51,6 +52,7 @@ public class CategoryAccessImplSockets implements ICategoryAccess {
                 Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
+                this.notificar();
                 return true;
             }
         }
@@ -76,6 +78,7 @@ public class CategoryAccessImplSockets implements ICategoryAccess {
                 Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 return false;
             } else {
+                this.notificar();
                 return true;
             }
         }
@@ -100,6 +103,7 @@ public class CategoryAccessImplSockets implements ICategoryAccess {
                 Logger.getLogger(CategoryAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
+                this.notificar();
                 return true;
             }
         }
@@ -205,7 +209,7 @@ public class CategoryAccessImplSockets implements ICategoryAccess {
         Protocol protocol = new Protocol();
         protocol.setResource("category");
         protocol.setAction("put");
-        protocol.addParameter("id", category.getCategoryId().toString());
+        protocol.addParameter("id", categoryId.toString());
         protocol.addParameter("name", category.getName());
 
         Gson gson = new Gson();
@@ -233,11 +237,11 @@ public class CategoryAccessImplSockets implements ICategoryAccess {
         return requestJson;
     }
 
-    private String doFindIdCategoryRequestJSON(Long id){
+    private String doFindIdCategoryRequestJSON(Long categoryId){
         Protocol protocol = new Protocol();
         protocol.setResource("category");
         protocol.setAction("get");
-        protocol.addParameter("id", id.toString());
+        protocol.addParameter("id", categoryId.toString());
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
