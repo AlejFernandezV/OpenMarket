@@ -12,6 +12,7 @@ import co.unicauca.strategyserver.infra.ServerHandler;
 import com.google.gson.Gson;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.infra.Protocol;
 import java.util.ArrayList;
 import java.util.List;
@@ -87,10 +88,27 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
                     response = processDeleteCategory(protocolRequest);
                 }
                 break;
+                
+            case "user":
+                if (protocolRequest.getAction().equals("get")) {
+                    response = processGetUser(protocolRequest);
+                }
+                if (protocolRequest.getAction().equals("post")) {   
+                    response = processPostUser(protocolRequest);
+                }
+                if(protocolRequest.getAction().equals("getall")){
+                    response = processGetUserAll();
+                }
+                if(protocolRequest.getAction().equals("put")){
+                    response = processPutUser(protocolRequest);
+                }
+                if(protocolRequest.getAction().equals("delete")){
+                    response = processDeleteUser(protocolRequest);
+                }
+                break;
         }
         this.actualizar();
         return response;
-
     }
 
     /**
@@ -137,6 +155,28 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
             return objectToJSON(category);
         }
     }
+    
+    private String processGetUser(Protocol protocolRequest) {
+        String parameter = protocolRequest.getParameters().get(0).getName();
+        
+        String value = protocolRequest.getParameters().get(0).getValue();
+        User user = null;
+        switch(parameter){
+            case "login":
+                user = serviceU.findByLoginUser(value);
+                break;
+            case "username":
+                user = serviceU.findByNameUser(value);
+                break;
+        }
+        if (user == null) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(user);
+        }
+    }
+    
     /**
      * Procesa la solicitud de agregar un producto
      *
@@ -164,6 +204,20 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         
         return response;
     }
+    
+    private String processPostUser(Protocol protocolRequest) {
+        User user = new User();
+        // Reconstruir el customer a partid de lo que viene en los parámetros
+        user.setLogin(protocolRequest.getParameters().get(0).getValue());
+        user.setUsername(protocolRequest.getParameters().get(1).getValue());
+        user.setPassword(protocolRequest.getParameters().get(2).getValue());
+
+        String response = getServiceU().createUser(user);
+        
+        return response;
+    }
+    
+    //PROCESS PUT
     
      private String processPutProduct(Protocol protocolRequest) {
         
@@ -203,6 +257,29 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         }
     }
     
+    private String processPutUser(Protocol protocolRequest) {
+        
+        String login = protocolRequest.getParameters().get(0).getValue();
+        String username = protocolRequest.getParameters().get(1).getValue();
+        String password = protocolRequest.getParameters().get(2).getValue();
+        
+        User user = serviceU.findByLoginUser(login);
+        
+        user.setUsername(username);
+        user.setPassword(password);
+        
+        String response = serviceU.editUser(login, user);
+        
+        if (user == null) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
+    }
+    
+    //PROCESS DELETE
+    
     private String processDeleteProduct(Protocol protocolRequest) {
         String id = protocolRequest.getParameters().get(0).getValue(); 
         
@@ -229,6 +306,21 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         }
     }
     
+    private String processDeleteUser(Protocol protocolRequest) {
+        String login = protocolRequest.getParameters().get(0).getValue(); 
+        
+        String response = serviceU.deleteUser(login);
+        
+        if (response.isEmpty()) {
+            String errorJson = generateNotFoundCategoryErrorJson();
+            return errorJson;
+        } else {
+            return objectToJSON(response);
+        }
+    }
+    
+    //PROCESS GET ALL
+    
     private String processGetProductAll() {
         List<Product> products;
         products = serviceP.findAllProducts();
@@ -240,12 +332,18 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         categories = serviceC.findAllCategories();
         return objectToJSON(categories);
     }
-
+    
+    private String processGetUserAll() {
+        List<User> users;
+        users = serviceU.findAllUsers();
+        return objectToJSON(users);
+    }
+    
     /**
      * Genera un ErrorJson de producto no encontrado
      *
      * @return error en formato json
-     */
+    */
     private String generateNotFoundProductErrorJson() {
         List<JsonError> errors = new ArrayList<>();
         JsonError error = new JsonError();
@@ -259,7 +357,6 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
 
         return errorsJson;
     }
-
 
     /**
      * Genera un ErrorJson de producto no encontrado
@@ -280,6 +377,25 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         return errorsJson;
     }
 
+    /**
+     * Genera un ErrorJson de usuario no encontrado
+     *
+     * @return error en formato json
+     */
+    private String generateNotFoundUserErrorJson() {
+        List<JsonError> errors = new ArrayList<>();
+        JsonError error = new JsonError();
+        error.setCode("404");
+        error.setError("NOT_FOUND");
+        error.setMessage("Usuario no encontrado. UserName no existe");
+        errors.add(error);
+
+        Gson gson = new Gson();
+        String errorsJson = gson.toJson(errors);
+
+        return errorsJson;
+    }
+    
     /**
      * @return the product service 
      */
@@ -308,11 +424,19 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         this.serviceC = serviceC;
     }
     
-    //TO DO
-    /*
-        - PROCESAR LOS REQUEST PARA LOS USUARIOS
-        - GETTER Y SETTER PARA EL SERVCICIO DE USUARIO
-    */
+    /**
+     * @return the user service 
+     */
+    public static UserService getServiceU() {
+        return serviceU;
+    }
+    
+    /**
+     * @param service the user service to set
+     */
+    public static void setServiceU(UserService serviceU) {
+        OpenMarketHandler.serviceU = serviceU;
+    }
 
     @Override
     public void actualizar() {
