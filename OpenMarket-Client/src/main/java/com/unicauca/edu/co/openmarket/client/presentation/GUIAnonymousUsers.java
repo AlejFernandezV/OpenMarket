@@ -6,9 +6,11 @@ package com.unicauca.edu.co.openmarket.client.presentation;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import com.unicauca.edu.co.openmarket.client.infra.Messages;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import reloj.frameworkobsobs.Observador;
 
@@ -18,6 +20,7 @@ import reloj.frameworkobsobs.Observador;
  */
 public class GUIAnonymousUsers extends javax.swing.JFrame {
     private ProductAccessImplSockets productAccess;
+    private Messages mns;
     /**
      * Creates new form GUIUsers
      */
@@ -67,11 +70,14 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         lblBuscarP = new javax.swing.JLabel();
         txtProductToFind = new javax.swing.JTextField();
         btnFindP = new javax.swing.JButton();
+        rbtnName = new javax.swing.JRadioButton();
+        rbtnDescription = new javax.swing.JRadioButton();
         jScrollProductsAU = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProducts = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         btnCloseAU = new javax.swing.JButton();
+        btnComprar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,22 +105,35 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        lblBuscarP.setText("Buscar");
+        lblBuscarP.setText("Buscar por:");
 
         btnFindP.setText("Buscar");
+        btnFindP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindPActionPerformed(evt);
+            }
+        });
+
+        rbtnName.setText("Nombre");
+
+        rbtnDescription.setText("Descripción");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(199, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(196, 196, 196)
                 .addComponent(lblBuscarP)
                 .addGap(18, 18, 18)
-                .addComponent(txtProductToFind, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rbtnName)
+                .addGap(18, 18, 18)
+                .addComponent(rbtnDescription)
+                .addGap(18, 18, 18)
+                .addComponent(txtProductToFind, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnFindP)
-                .addGap(189, 189, 189))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +142,9 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscarP)
                     .addComponent(txtProductToFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFindP))
+                    .addComponent(btnFindP)
+                    .addComponent(rbtnName)
+                    .addComponent(rbtnDescription))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -150,21 +171,32 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
             }
         });
 
+        btnComprar.setText("Comprar");
+        btnComprar.setActionCommand("Comprar");
+        btnComprar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(376, 376, 376)
+                .addGap(326, 326, 326)
                 .addComponent(btnCloseAU)
+                .addGap(18, 18, 18)
+                .addComponent(btnComprar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCloseAU)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCloseAU)
+                    .addComponent(btnComprar))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,10 +243,51 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCloseAUActionPerformed
 
+    private void btnFindPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPActionPerformed
+        // TODO add your handling code here:
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
+        Object rowData[] = new Object[3];//No columnas
+        Product objProduct = null;
+        if(this.rbtnName.isSelected()){
+            try {
+                objProduct = productAccess.findByName(this.txtProductToFind.getText());
+                
+                rowData[0] = objProduct.getProductId();
+                rowData[1] = objProduct.getName();
+                rowData[2] = objProduct.getDescription();
+                
+                model.addRow(rowData);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else{
+            try {
+                objProduct = productAccess.findByDescription(this.txtProductToFind.getText());
+                rowData[0] = objProduct.getProductId();
+                rowData[1] = objProduct.getName();
+                rowData[2] = objProduct.getDescription();
+                
+                model.addRow(rowData);
+                
+            } catch (Exception ex) {
+                Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_btnFindPActionPerformed
+
+    private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnComprarActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseAU;
+    private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnFindP;
     private javax.swing.JButton btnMostrarProductos;
     private javax.swing.JPanel jPanel1;
@@ -223,6 +296,8 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollProductsAU;
     private javax.swing.JLabel lblBuscarP;
+    private javax.swing.JRadioButton rbtnDescription;
+    private javax.swing.JRadioButton rbtnName;
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtProductToFind;
     // End of variables declaration//GEN-END:variables
