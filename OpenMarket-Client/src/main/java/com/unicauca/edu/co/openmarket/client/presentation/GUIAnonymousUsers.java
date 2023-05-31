@@ -81,6 +81,8 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnMostrarProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnMostrarProductos.setForeground(new java.awt.Color(0, 153, 0));
         btnMostrarProductos.setText("Mostrar Productos");
         btnMostrarProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,20 +95,22 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(355, 355, 355)
+                .addGap(339, 339, 339)
                 .addComponent(btnMostrarProductos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnMostrarProductos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
+        lblBuscarP.setFont(new java.awt.Font("Segoe UI", 3, 12)); // NOI18N
         lblBuscarP.setText("Buscar por:");
 
+        btnFindP.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnFindP.setText("Buscar");
         btnFindP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +118,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
             }
         });
 
+        rbtnName.setSelected(true);
         rbtnName.setText("Nombre");
 
         rbtnDescription.setText("Descripción");
@@ -133,7 +138,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
                 .addComponent(txtProductToFind, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnFindP)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,6 +169,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
 
         jScrollProductsAU.setViewportView(jScrollPane1);
 
+        btnCloseAU.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCloseAU.setText("Cerrar");
         btnCloseAU.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,8 +177,8 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
             }
         });
 
+        btnComprar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnComprar.setText("Comprar");
-        btnComprar.setActionCommand("Comprar");
         btnComprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprarActionPerformed(evt);
