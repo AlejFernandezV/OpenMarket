@@ -72,6 +72,7 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnSearchAll = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
 
@@ -82,35 +83,29 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
 
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nombre", "Descripción"
             }
         ));
         jScrollPane1.setViewportView(tblProducts);
 
         pnlCenter.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
-
         jLabel1.setText("Buscar por:");
-        pnlNorth.add(jLabel1);
 
         buttonGroup1.add(rdoId);
         rdoId.setSelected(true);
         rdoId.setText("Id");
-        pnlNorth.add(rdoId);
 
         buttonGroup1.add(rdoName);
         rdoName.setText("Nombre del producto");
-        pnlNorth.add(rdoName);
 
         txtSearch.setPreferredSize(new java.awt.Dimension(62, 32));
-        pnlNorth.add(txtSearch);
 
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -118,17 +113,61 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
                 btnSearchActionPerformed(evt);
             }
         });
-        pnlNorth.add(btnSearch);
 
-        btnSearchAll.setText("Buscar Todos");
+        btnSearchAll.setText("Mostrar Todos");
         btnSearchAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchAllActionPerformed(evt);
             }
         });
-        pnlNorth.add(btnSearchAll);
 
-        getContentPane().add(pnlNorth, java.awt.BorderLayout.PAGE_START);
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout pnlNorthLayout = new javax.swing.GroupLayout(pnlNorth);
+        pnlNorth.setLayout(pnlNorthLayout);
+        pnlNorthLayout.setHorizontalGroup(
+            pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNorthLayout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rdoId)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rdoName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearch)
+                .addGap(18, 18, 18)
+                .addComponent(btnSearchAll)
+                .addContainerGap())
+        );
+        pnlNorthLayout.setVerticalGroup(
+            pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNorthLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(btnSearch)
+                    .addComponent(btnSearchAll)
+                    .addComponent(rdoName)
+                    .addComponent(rdoId)
+                    .addComponent(jLabel1))
+                .addContainerGap())
+        );
+
+        pnlCenter.add(pnlNorth, java.awt.BorderLayout.PAGE_START);
+
+        getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
 
         btnClose.setText("Cerrar");
         btnClose.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +237,7 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNorth;
