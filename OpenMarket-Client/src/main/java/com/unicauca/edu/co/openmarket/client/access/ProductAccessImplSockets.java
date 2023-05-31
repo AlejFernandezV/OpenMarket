@@ -162,6 +162,34 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
             }
         }
     }
+    
+    @Override
+    public Product findByDescription(String description) throws Exception {
+        String jsonResponse = null;
+        String requestJson = doFindDescriptionProductRequestJSON(description);
+        System.out.println(requestJson);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendRequest(requestJson);
+            mySocket.disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                //Encontró el producto
+                Product product = jsonToProduct(jsonResponse);
+                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
+                return product;
+            }
+        }
+    }
 
     @Override
     public List<Product> findProductsByCategorie(String nameCategorie) {
@@ -245,6 +273,18 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         protocol.setResource("product");
         protocol.setAction("get");
         protocol.addParameter("id", productId.toString());
+
+        Gson gson = new Gson();
+        String requestJson = gson.toJson(protocol);
+
+        return requestJson;
+    }
+    
+    private String doFindDescriptionProductRequestJSON(String description){
+        Protocol protocol = new Protocol();
+        protocol.setResource("product");
+        protocol.setAction("get");
+        protocol.addParameter("description", description);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);

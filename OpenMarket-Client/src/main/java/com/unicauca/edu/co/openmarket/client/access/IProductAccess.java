@@ -20,6 +20,8 @@ public interface IProductAccess {
     
     Product findByName (String name) throws Exception;
     
+    Product findByDescription (String description) throws Exception;
+    
     List<Product> findProductsByCategorie(String nameCategorie) throws Exception;
     
     List<Product> findAll() throws Exception;
