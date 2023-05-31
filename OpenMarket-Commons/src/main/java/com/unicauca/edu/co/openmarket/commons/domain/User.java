@@ -21,6 +21,10 @@ public class User {
      * Nombres y apellidos completos
      */
     private String username;
+    /**
+     *
+     */
+    private enumRoleUser role;
     
     /*
     *   Constructor no parametrizado
@@ -35,12 +39,19 @@ public class User {
      * @param password contraseña secreta
      * @param username nombre del usuario
      */
-    public User(String login, String password, String username) {
+    public User(String login, String password, String username, enumRoleUser role) {
         this.login = login;
         this.password = password;
         this.username = username;
+        this.role = role;
+    }
 
-        //Vuelo vuelo = new Vuelo();
+    public enumRoleUser getRole() {
+        return role;
+    }
+    
+    public void setRole(enumRoleUser role) {    
+        this.role = role;
     }
 
     public String getLogin() {

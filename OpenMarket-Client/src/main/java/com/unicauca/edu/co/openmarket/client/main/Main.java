@@ -3,6 +3,7 @@ package com.unicauca.edu.co.openmarket.client.main;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.presentation.GUIAnonymousUsers;
 import com.unicauca.edu.co.openmarket.client.presentation.GUICategories;
 import com.unicauca.edu.co.openmarket.client.presentation.GUICategoriesFind;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProducts;
@@ -23,6 +24,10 @@ public class Main {
         
         //IProductAccess access = Factory.getInstance().getProductService();
         ProductAccessImplSockets productAccess = new ProductAccessImplSockets();
+        
+        GUIAnonymousUsers gui = new GUIAnonymousUsers(productAccess);
+        gui.setVisible(true);
+        
         GUIProducts instance = new GUIProducts();
         instance.setProductAccess(productAccess);
         instance.setVisible(true);
@@ -30,6 +35,7 @@ public class Main {
         productAccess.addObservador(instance2);
         instance2.setVisible(true);
         
+        /*
         CategoryAccessImplSockets categoryAccess = new CategoryAccessImplSockets();
         GUICategories instanceC = new GUICategories();
         instanceC.setCategoryAccess(categoryAccess);
@@ -37,6 +43,7 @@ public class Main {
         GUICategoriesFind instance3 = new GUICategoriesFind(null,false, categoryAccess);
         categoryAccess.addObservador(instance3);
         instance3.setVisible(true);
+        */
     }
     
 }
