@@ -6,8 +6,10 @@ package co.edu.unicauca.openmarket.server.infra.tcpip;
 
 import co.edu.unicauca.openmarket.server.access.CategoryRepositoryImplArrays;
 import co.edu.unicauca.openmarket.server.access.ProductRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.UserRepositoryImplArrays;
 import co.edu.unicauca.openmarket.server.domain.services.CategoryService;
 import co.edu.unicauca.openmarket.server.domain.services.ProductService;
+import co.edu.unicauca.openmarket.server.domain.services.UserService;
 import co.unicauca.strategyserver.infra.ServerSocketMultiThread;
 import java.util.Scanner;
 
@@ -27,6 +29,7 @@ public class OpenMarketServer {
         OpenMarketHandler myHandler = new OpenMarketHandler();
         myHandler.setServiceP(new ProductService(new ProductRepositoryImplArrays()));
         myHandler.setServiceC(new CategoryService(new CategoryRepositoryImplArrays()));
+        myHandler.setServiceU(new UserService(new UserRepositoryImplArrays()));
         myServer.setServerHandler(myHandler);
         myServer.startServer();
         myHandler.getServiceP().addObservador(myHandler);
