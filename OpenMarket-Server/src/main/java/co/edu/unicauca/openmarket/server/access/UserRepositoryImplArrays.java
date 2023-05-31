@@ -1,6 +1,7 @@
 package co.edu.unicauca.openmarket.server.access;
 
 import com.unicauca.edu.co.openmarket.commons.domain.User;
+import com.unicauca.edu.co.openmarket.commons.domain.enumRoleUser;
 import java.util.ArrayList;
 import java.util.List;
 import reloj.frameworkobsobs.Observado;
@@ -29,6 +30,7 @@ public class UserRepositoryImplArrays extends Observado implements IUserReposito
 
     public void inicializar() {
         
+        User user1 = new User("LUser1","1234","Usuario 1", enumRoleUser.UNREGISTERED);
     }
     
     @Override
