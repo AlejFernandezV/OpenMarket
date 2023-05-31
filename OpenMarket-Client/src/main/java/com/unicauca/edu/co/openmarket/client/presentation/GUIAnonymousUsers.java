@@ -21,6 +21,7 @@ import reloj.frameworkobsobs.Observador;
 public class GUIAnonymousUsers extends javax.swing.JFrame {
     private ProductAccessImplSockets productAccess;
     private Messages mns;
+    
     /**
      * Creates new form GUIUsers
      */
@@ -31,6 +32,14 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         this.productAccess = productAccess;
         setLocationRelativeTo(null); //centrar al ventana
     }
+
+    public GUIAnonymousUsers(ProductAccessImplSockets productAccess) {
+        initComponents();
+        initializeTable();
+        this.productAccess = productAccess;
+        setLocationRelativeTo(null); //centrar al ventana
+    }
+
     
     private void initializeTable() {
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(

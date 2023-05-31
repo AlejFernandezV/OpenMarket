@@ -307,12 +307,14 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
     public void setServiceC(CategoryService serviceC) {
         this.serviceC = serviceC;
     }
-    
-    //TO DO
-    /*
-        - PROCESAR LOS REQUEST PARA LOS USUARIOS
-        - GETTER Y SETTER PARA EL SERVCICIO DE USUARIO
-    */
+
+    public UserService getServiceU() {
+        return serviceU;
+    }
+
+    public void setServiceU(UserService serviceU) {
+        OpenMarketHandler.serviceU = serviceU;
+    }
 
     @Override
     public void actualizar() {
