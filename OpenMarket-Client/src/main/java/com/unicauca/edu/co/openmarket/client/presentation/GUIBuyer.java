@@ -27,6 +27,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         initComponents();
         initializeTable();
         this.productAccess = productAccess;
+        mostrarTabla();
         setLocationRelativeTo(null); //centrar al ventana
     }
     
@@ -74,11 +75,10 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         pnlNort = new javax.swing.JPanel();
         pnlNorth = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        rdoId = new javax.swing.JRadioButton();
+        rdoDescripcion = new javax.swing.JRadioButton();
         rdoName = new javax.swing.JRadioButton();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        btnSearchAll = new javax.swing.JButton();
         pnlTitle = new javax.swing.JPanel();
         OpenMarketTitle = new javax.swing.JLabel();
 
@@ -144,17 +144,46 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
 
         getContentPane().add(pnlSouth, java.awt.BorderLayout.PAGE_END);
 
-        jLabel1.setText("Buscar por:");
-        pnlNorth.add(jLabel1);
+        pnlNorth.setLayout(new java.awt.GridBagLayout());
 
-        buttonGroup1.add(rdoId);
-        rdoId.setSelected(true);
-        rdoId.setText("Id");
-        pnlNorth.add(rdoId);
+        jLabel1.setText("Buscar por:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(13, 93, 0, 0);
+        pnlNorth.add(jLabel1, gridBagConstraints);
+
+        buttonGroup1.add(rdoDescripcion);
+        rdoDescripcion.setSelected(true);
+        rdoDescripcion.setText("Descripcion");
+        rdoDescripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoDescripcionActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        pnlNorth.add(rdoDescripcion, gridBagConstraints);
 
         buttonGroup1.add(rdoName);
         rdoName.setText("Nombre del producto");
-        pnlNorth.add(rdoName);
+        rdoName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNameActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 5, 0, 0);
+        pnlNorth.add(rdoName, gridBagConstraints);
 
         txtSearch.setPreferredSize(new java.awt.Dimension(62, 32));
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +191,15 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
                 txtSearchActionPerformed(evt);
             }
         });
-        pnlNorth.add(txtSearch);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.ipadx = 76;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 16, 0);
+        pnlNorth.add(txtSearch, gridBagConstraints);
 
         btnSearch.setText("Buscar");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -170,15 +207,13 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
                 btnSearchActionPerformed(evt);
             }
         });
-        pnlNorth.add(btnSearch);
-
-        btnSearchAll.setText("Buscar Todos");
-        btnSearchAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchAllActionPerformed(evt);
-            }
-        });
-        pnlNorth.add(btnSearchAll);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 4;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 6, 0, 15);
+        pnlNorth.add(btnSearch, gridBagConstraints);
 
         pnlTitle.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -193,7 +228,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             .addGroup(pnlNortLayout.createSequentialGroup()
                 .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlNorth, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                .addComponent(pnlNorth, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE))
         );
         pnlNortLayout.setVerticalGroup(
             pnlNortLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,9 +250,9 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         Object rowData[] = new Object[3];//No columnas
         Product objProduct = null;
-        if(this.rdoId.isSelected()){
+        if(this.rdoDescripcion.isSelected()){
             try {
-                objProduct = productAccess.findById(Long.parseLong(this.txtSearch.getText()));
+                objProduct = productAccess.findByDescription(this.txtSearch.getText());
                 
                 rowData[0] = objProduct.getProductId();
                 rowData[1] = objProduct.getName();
@@ -244,14 +279,6 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllActionPerformed
-        try {
-            fillTable(productAccess.findAll());
-        } catch (Exception ex) {
-            Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnSearchAllActionPerformed
-
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
@@ -264,13 +291,20 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         // TODO add your handling code here:
     }//GEN-LAST:event_btnComprarActionPerformed
 
+    private void rdoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoNameActionPerformed
+
+    private void rdoDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDescripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rdoDescripcionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel OpenMarketTitle;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearchAll;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
@@ -280,7 +314,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlSouth;
     private javax.swing.JPanel pnlTitle;
-    private javax.swing.JRadioButton rdoId;
+    private javax.swing.JRadioButton rdoDescripcion;
     private javax.swing.JRadioButton rdoName;
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtSearch;
@@ -290,6 +324,14 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     public void actualizar() {
         try {
             fillTable(productAccess.findAll() );
+        } catch (Exception ex) {
+            Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void mostrarTabla(){
+        try {
+            fillTable(productAccess.findAll());
         } catch (Exception ex) {
             Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
         }
