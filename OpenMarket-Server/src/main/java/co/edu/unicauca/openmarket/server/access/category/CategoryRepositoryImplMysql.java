@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package co.edu.unicauca.openmarket.server.access;
+package co.edu.unicauca.openmarket.server.access.category;
 
+import co.edu.unicauca.openmarket.server.access.category.ICategoryRepository;
 import co.unicauca.strategyserver.helpers.Utilities;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.sql.Connection;

@@ -4,9 +4,9 @@
  */
 package co.edu.unicauca.openmarket.server.infra.tcpip;
 
-import co.edu.unicauca.openmarket.server.access.CategoryRepositoryImplArrays;
-import co.edu.unicauca.openmarket.server.access.ProductRepositoryImplArrays;
-import co.edu.unicauca.openmarket.server.access.UserRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.category.CategoryRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.product.ProductRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.user.UserRepositoryImplArrays;
 import co.edu.unicauca.openmarket.server.domain.services.CategoryService;
 import co.edu.unicauca.openmarket.server.domain.services.ProductService;
 import co.edu.unicauca.openmarket.server.domain.services.UserService;

@@ -1,5 +1,6 @@
-package co.edu.unicauca.openmarket.server.access;
+package co.edu.unicauca.openmarket.server.access.user;
 
+import co.edu.unicauca.openmarket.server.access.user.IUserRepository;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.domain.enumRoleUser;
 import java.util.ArrayList;
