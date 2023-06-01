@@ -10,18 +10,16 @@ import com.unicauca.edu.co.openmarket.client.infra.Messages;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import reloj.frameworkobsobs.Observador;
-
 /**
  *
  * @author manue
  */
 public class GUIAnonymousUsers extends javax.swing.JFrame {
     private ProductAccessImplSockets productAccess;
-    private Messages mns;
-    
+    private Messages mens;
     /**
      * Creates new form GUIUsers
      */
@@ -295,7 +293,12 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        
+        String mns, title;
+        mns = "Necesitas estar registrado para poder comprar";
+        title = "Registrar usuario";
+        mens.warningMessage(mns, title);
+        String[] options ={"Registrarse", "Cerrar"};
+        JOptionPane.showOptionDialog(rootPane, mens, title, WIDTH, JOptionPane.WARNING_MESSAGE, null, options, title);
     }//GEN-LAST:event_btnComprarActionPerformed
 
 
