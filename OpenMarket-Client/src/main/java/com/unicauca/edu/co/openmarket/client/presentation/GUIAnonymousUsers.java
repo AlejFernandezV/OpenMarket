@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -296,9 +297,14 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         String mns, title;
         mns = "Necesitas estar registrado para poder comprar";
         title = "Registrar usuario";
-        mens.warningMessage(mns, title);
-        String[] options ={"Registrarse", "Cerrar"};
-        JOptionPane.showOptionDialog(rootPane, mens, title, WIDTH, JOptionPane.WARNING_MESSAGE, null, options, title);
+        String[] options = {"Registrarse", "Cerrar"};
+        int opc = JOptionPane.showOptionDialog(rootPane, mns, title, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, title);
+        if(opc == 0){
+            //Parte de Guillermo
+            System.out.println("SIII");
+        }else if(opc == 1){
+            this.dispose();
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
 
 
