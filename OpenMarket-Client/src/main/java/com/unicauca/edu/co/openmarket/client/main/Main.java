@@ -30,14 +30,14 @@ public class Main {
         GUIAnonymousUsers gui = new GUIAnonymousUsers(productAccess);
         gui.setVisible(true);
         
+        /*
         GUIProducts instance = new GUIProducts();
         instance.setProductAccess(productAccess);
         instance.setVisible(true);
         GUIProductsFind instance2 = new GUIProductsFind(null,false, productAccess);
         productAccess.addObservador(instance2);
         instance2.setVisible(true);
-        
-        /*
+   
         CategoryAccessImplSockets categoryAccess = new CategoryAccessImplSockets();
         GUICategories instanceC = new GUICategories();
         instanceC.setCategoryAccess(categoryAccess);
@@ -45,11 +45,11 @@ public class Main {
         GUICategoriesFind instance3 = new GUICategoriesFind(null,false, categoryAccess);
         categoryAccess.addObservador(instance3);
         instance3.setVisible(true);
-
+        */
         ProductAccessImplSockets buyerAcces = new ProductAccessImplSockets();
         GUIRegistred instanceB = new GUIRegistred();
         instanceB.setProductAccess(buyerAcces);
-        instanceB.setVisible(true);*/
+        instanceB.setVisible(true);
     }
     
 }
