@@ -10,7 +10,6 @@ import com.unicauca.edu.co.openmarket.client.presentation.GUICategoriesFind;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProducts;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIProductsFind;
 import com.unicauca.edu.co.openmarket.client.presentation.GUIRegistred;
-
 /**
  *
  * @author Libardo Pantoja
