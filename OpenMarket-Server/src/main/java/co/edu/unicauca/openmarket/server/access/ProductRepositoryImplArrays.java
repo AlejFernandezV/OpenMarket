@@ -130,7 +130,7 @@ public class ProductRepositoryImplArrays extends Observado implements IProductRe
 
     @Override
     /**
-    * Encuentra un producto por Id en el arreglo
+    * Encuentra un producto por nombre en el arreglo
     *
     * @param name Nombre del producto que se encontrará del arreglo
     * @return Objeto categoria encontrado por el nombre.
@@ -145,9 +145,37 @@ public class ProductRepositoryImplArrays extends Observado implements IProductRe
     }
     
     @Override
-    //TO DO
+    /**
+    * Encuentra un producto por descripcion en el arreglo
+    *
+    * @param description del producto que se encontrará del arreglo
+    * @return Objeto categoria encontrado por la descripción.
+    */
+    public List<Product> findByDescription(String description) {
+        List<Product> productsFound = new ArrayList<>();
+        for(Product p: products){
+            if(p.getDescription().contains(description)){
+                productsFound.add(p);
+            }
+        }
+        return productsFound;
+    }
+    
+    @Override
+    /**
+    * Encuentra los productos con la misma categoria en el arreglo
+    *
+    * @param nameCategorie del producto que se encontrará del arreglo
+    * @return Lista de los arreglos con la categoria buscada.
+    */
     public List<Product> findProductsByCategorie(String nameCategorie) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Product> productsFound = new ArrayList<>();
+        for(Product p: products){
+            if(p.getCategory().getName().equals(nameCategorie)){
+                productsFound.add(p);
+            }
+        }
+        return productsFound;
     }
 
     @Override
@@ -159,5 +187,4 @@ public class ProductRepositoryImplArrays extends Observado implements IProductRe
     public List<Product> findAll() {
         return products;
     }
-    
 }

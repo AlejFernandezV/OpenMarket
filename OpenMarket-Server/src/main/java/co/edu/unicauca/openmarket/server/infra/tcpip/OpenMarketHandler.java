@@ -120,6 +120,7 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
         String parameter = protocolRequest.getParameters().get(0).getName();
         String value = protocolRequest.getParameters().get(0).getValue();
         Product product = null;
+        List<Product> products = null;
         switch(parameter){
             case "id":
                 product = serviceP.findByIdProduct(Long.parseLong(value));
@@ -127,11 +128,17 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
             case "name":
                 product = serviceP.findByNameProduct(value);
                 break;
+            case "description":
+                products = serviceP.findByDescriptionProduct(value);
+                break;
         }
         if (product == null) {
             String errorJson = generateNotFoundProductErrorJson();
             return errorJson;
         } else {
+            if(parameter.equals("description")){
+                return objectToJSON(products);
+            }
             return objectToJSON(product);
         }
     }

@@ -269,4 +269,35 @@ public class ProductRepositoryImplMysql implements IProductRepository{
         return products;
     }
 
+    @Override
+    public List<Product> findByDescription(String description) {
+        List<Product> products = new ArrayList<>();
+        try {
+
+            String sql = "SELECT productId, name, description FROM products  "
+                    + "WHERE description LIKE ?";
+            //this.connect();
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, description);
+            
+            ResultSet rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                Product newProduct = new Product();
+                newProduct.setProductId(rs.getLong("productId"));
+                newProduct.setName(rs.getString("name"));
+                newProduct.setDescription(rs.getString("description"));
+                //newProduct.getCategory().setCategoryId(rs.getLong("fk_categoryId"));    //CAMBIO
+
+                products.add(newProduct);
+            }
+            //this.disconnect();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepositoryImplMysql.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return products;
+    }
+
 }
