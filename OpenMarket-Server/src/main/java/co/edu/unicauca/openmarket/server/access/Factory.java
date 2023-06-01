@@ -4,6 +4,15 @@
  */
 package co.edu.unicauca.openmarket.server.access;
 
+import co.edu.unicauca.openmarket.server.access.user.UserRepositoryImplMysql;
+import co.edu.unicauca.openmarket.server.access.user.UserRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.user.IUserRepository;
+import co.edu.unicauca.openmarket.server.access.product.ProductRepositoryImplMysql;
+import co.edu.unicauca.openmarket.server.access.product.ProductRepositoryImplArrays;
+import co.edu.unicauca.openmarket.server.access.product.IProductRepository;
+import co.edu.unicauca.openmarket.server.access.category.CategoryRepositoryImplMysql;
+import co.edu.unicauca.openmarket.server.access.category.ICategoryRepository;
+import co.edu.unicauca.openmarket.server.access.category.CategoryRepositoryImplArrays;
 import co.unicauca.strategyserver.helpers.Utilities;
 
 /**
