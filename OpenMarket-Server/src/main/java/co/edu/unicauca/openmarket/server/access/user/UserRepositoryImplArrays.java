@@ -7,11 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import reloj.frameworkobsobs.Observado;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
  *
  * @author Alejandro
@@ -32,6 +27,14 @@ public class UserRepositoryImplArrays extends Observado implements IUserReposito
     public void inicializar() {
         
         User user1 = new User("LUser1","1234","Usuario 1", enumRoleUser.UNREGISTERED);
+        User user2 = new User("LUser2","1234","Usuario 2", enumRoleUser.REGISTERED);
+        User user3 = new User("Seller1","1234","Usuario Seller", enumRoleUser.SELLER);
+        User user4 = new User("Admin","1234","Admin OM", enumRoleUser.ADMIN);
+        
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
     }
     
     @Override
