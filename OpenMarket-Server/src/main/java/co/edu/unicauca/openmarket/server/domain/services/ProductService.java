@@ -52,6 +52,18 @@ public class ProductService extends Observado{
     public synchronized Product findByNameProduct(String name) {
         return repo.findByName(name);
     }
+    
+    /**
+     * Buscar un producto
+     *
+     * @param name nombre
+     * @return objeto tipo Product
+     */
+    public synchronized List<Product> findByDescriptionProduct(String desc) {
+        return repo.findByDescription(desc);
+    }
+    
+    
 
     /**
      * Crea una nueva categoria. Aplica validaciones de negocio
