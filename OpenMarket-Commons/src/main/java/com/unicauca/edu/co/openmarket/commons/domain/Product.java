@@ -20,15 +20,18 @@ public class Product {
     
     private Category category;
     
+    private String calificacion;
+    
     /*private Location location;
     
     private User user;*/
 
-    public Product(Long productId, String name, String description, double price) {
+    public Product(Long productId, String name, String description, double price, String calificacion) {
         this.productId = productId;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.calificacion = calificacion;
     }
 
     public Product() {
@@ -89,4 +92,12 @@ public class Product {
     public void setUser(User user) {
         this.user = user;
     }*/
+
+    public String getCalificacion() {
+        return calificacion;
+    }
+
+    public void setCalificacion(String calificacion) {
+        this.calificacion = calificacion;
+    }
 }

@@ -36,7 +36,7 @@ public class ProductsController {
     }
 
     public boolean addProduct(String name, String description) {
-        Product product = new Product(0L,name, description, 0);
+        Product product = new Product(0L,name, description, 0, "");
         OMAddProductCommand comm = new OMAddProductCommand(product, productAccess);
         ominvoker.addCommand(comm);
         ominvoker.execute(); 

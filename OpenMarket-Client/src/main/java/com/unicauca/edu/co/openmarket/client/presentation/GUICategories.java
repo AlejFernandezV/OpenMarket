@@ -241,27 +241,6 @@ public class GUICategories extends javax.swing.JFrame {
         txtIdC.requestFocus();
     }//GEN-LAST:event_btnEditarCActionPerformed
 
-    private void txtIdCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCFocusLost
-        try {
-            if (txtIdC.getText().trim().equals("")) {
-                return;
-            }
-            Long categoryId = Long.parseLong(txtIdC.getText());
-            Category category = categoryAccess.findByIdC(categoryId);
-
-            if (category == null) {
-                successMessage("El identificador del producto no existe", "Error");
-                txtIdC.setText("");
-                txtIdC.requestFocus();
-            } else {
-                txtNombreC.setText(category.getName());
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(GUICategories.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_txtIdCFocusLost
-
     private void btnEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCActionPerformed
         String id = txtIdC.getText().trim();
         if (id.equals("")) {
@@ -296,6 +275,26 @@ public class GUICategories extends javax.swing.JFrame {
         if(!ominvoker.hasMoreCommands())
             this.btnDeshacer.setVisible(false);
     }//GEN-LAST:event_btnDeshacerActionPerformed
+
+    private void txtIdCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCFocusLost
+        try {
+            if (txtIdC.getText().trim().equals("")) {
+                return;
+            }
+            Long categoryId = Long.parseLong(txtIdC.getText());
+            Category category = categoryAccess.findByIdC(categoryId);
+
+            if (category == null) {
+                successMessage("El identificador del producto no existe", "Error");
+                txtIdC.setText("");
+                txtIdC.requestFocus();
+            } else {
+                txtNombreC.setText(category.getName());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GUICategories.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtIdCFocusLost
 
     private void stateEdit() {
         btnNuevoC.setVisible(false);
