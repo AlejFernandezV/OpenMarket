@@ -1,5 +1,5 @@
 
-package co.edu.unicauca.openmarket.server.access;
+package co.edu.unicauca.openmarket.server.access.user;
 
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import java.util.List;

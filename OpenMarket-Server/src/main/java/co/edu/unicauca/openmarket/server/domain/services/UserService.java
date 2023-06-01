@@ -1,7 +1,7 @@
 
 package co.edu.unicauca.openmarket.server.domain.services;
 
-import co.edu.unicauca.openmarket.server.access.IUserRepository;
+import co.edu.unicauca.openmarket.server.access.user.IUserRepository;
 import co.unicauca.strategyserver.helpers.JsonError;
 import co.unicauca.strategyserver.helpers.Utilities;
 import com.google.gson.Gson;
