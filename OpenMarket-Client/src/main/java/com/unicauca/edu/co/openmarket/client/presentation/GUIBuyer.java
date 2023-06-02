@@ -7,11 +7,16 @@ package com.unicauca.edu.co.openmarket.client.presentation;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import reloj.frameworkobsobs.Observador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -22,7 +27,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     /**
      * Creates new form GUIProductsFind
      */
-    public GUIBuyer(java.awt.Frame parent, boolean modal,ProductAccessImplSockets productAccess) {
+    public GUIBuyer (java.awt.Frame parent, boolean modal,ProductAccessImplSockets productAccess) {
         super(parent, modal);
         initComponents();
         initializeTable();
@@ -120,10 +125,10 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             }
         ));
         tblProducts.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tblProductsAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -288,7 +293,9 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     }//GEN-LAST:event_tblProductsAncestorAdded
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
+        GUIBuy instance = new GUIBuy(this, true, productAccess);
+        instance.setVisible(true);
+        productAccess.addObservador((Observador) instance);
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void rdoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNameActionPerformed
