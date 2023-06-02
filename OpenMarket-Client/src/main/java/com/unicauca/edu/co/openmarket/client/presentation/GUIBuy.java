@@ -24,6 +24,7 @@ public class GUIBuy extends javax.swing.JFrame {
     private ProductAccessImplSockets productAccess;
     private boolean addOption;
     private OMInvoker ominvoker;
+    private JFrame frame;
     
 
     /**
@@ -67,6 +68,7 @@ public class GUIBuy extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         btnAccept = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         pnlSouth = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JButton();
 
@@ -74,28 +76,29 @@ public class GUIBuy extends javax.swing.JFrame {
         setTitle("Productos");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Realizar Compra");
+        jLabel1.setText("¿Como quieres pagar?");
 
         javax.swing.GroupLayout pnlNorthLayout = new javax.swing.GroupLayout(pnlNorth);
         pnlNorth.setLayout(pnlNorthLayout);
         pnlNorthLayout.setHorizontalGroup(
             pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlNorthLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(609, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNorthLayout.createSequentialGroup()
+                .addContainerGap(270, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(267, 267, 267))
         );
         pnlNorthLayout.setVerticalGroup(
             pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlNorthLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 52, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlNorth, java.awt.BorderLayout.PAGE_START);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Selecciona el tipo de Tarjeta");
-        pnlCenter.add(jLabel2);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Visa", "Mastercard", "American Express" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +106,6 @@ public class GUIBuy extends javax.swing.JFrame {
                 jComboBox1ActionPerformed(evt);
             }
         });
-        pnlCenter.add(jComboBox1);
 
         btnAccept.setText("Aceptar");
         btnAccept.setAlignmentX(10.0F);
@@ -119,20 +121,50 @@ public class GUIBuy extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
-        pnlCenter.add(jPanel1);
-        jPanel1.getAccessibleContext().setAccessibleParent(pnlSouth);
+        javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
+        pnlCenter.setLayout(pnlCenterLayout);
+        pnlCenterLayout.setHorizontalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCenterLayout.createSequentialGroup()
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jLabel3)))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
+        );
+        pnlCenterLayout.setVerticalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCenterLayout.createSequentialGroup()
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel3)))
+                .addContainerGap(400, Short.MAX_VALUE))
+        );
 
         getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
 
@@ -223,7 +255,27 @@ public class GUIBuy extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-        // TODO add your handling code here:
+       
+         btnAccept.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedOption = (String) jComboBox1.getSelectedItem();
+                if (selectedOption.equals("Visa")) {
+                    showMenuOption1();
+                } else if (selectedOption.equals("Mastercard")) {
+                    showMenuOption2();
+                } else if (selectedOption.equals("American Express")) {
+                    showMenuOption3();
+                }
+            }
+        });
+         
+        frame.setLayout(new FlowLayout());
+        frame.add(jComboBox1);
+        //frame.add(btnAccept);
+        frame.pack();
+        frame.setVisible(true);
+         
     }//GEN-LAST:event_btnAcceptActionPerformed
     private void stateEdit() {
        
@@ -247,6 +299,69 @@ public class GUIBuy extends javax.swing.JFrame {
     
 
     }
+    
+     private void showMenuOption1() {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(10, 10));
+
+        JLabel lblNumeroTarjeta = new JLabel("Número de Tarjeta:");
+        JTextField txtNumeroTarjeta = new JTextField();
+
+        JLabel lblFechaVencimiento = new JLabel("Fecha de Vencimiento:");
+        JTextField txtFechaVencimiento = new JTextField();
+
+        JLabel lblCodigoSeguridad = new JLabel("Codigo de Seguridad:");
+        JTextField txtCodigoSeguridad = new JTextField();
+
+        JLabel lblNombreTitular = new JLabel("Nombre del Titular:");
+        JTextField txtNombreTitular = new JTextField();
+
+        JLabel lblDireccionFact = new JLabel("Direccion de Facturación:");
+        JTextField txtDireccionFact = new JTextField();
+
+        panel.add(lblNumeroTarjeta);
+        panel.add(txtNumeroTarjeta);
+        panel.add(lblFechaVencimiento);
+        panel.add(txtFechaVencimiento); 
+        panel.add(lblCodigoSeguridad);
+        panel.add(txtCodigoSeguridad);
+        panel.add(lblNombreTitular);
+        panel.add(txtNombreTitular);
+        panel.add(lblDireccionFact);
+        panel.add(txtDireccionFact);
+    
+
+     int result = JOptionPane.showConfirmDialog(frame, panel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION);
+
+     if (result == JOptionPane.OK_OPTION) {
+         String numeroTarjeta = txtNumeroTarjeta.getText();
+         String FechaVencimiento = txtFechaVencimiento.getText();
+         String CodigoSeguridad = txtCodigoSeguridad.getText();
+         String nombreTitular = txtNombreTitular.getText();
+         String DireccionFact = txtDireccionFact.getText();
+         
+
+         if (numeroTarjeta.isEmpty() || FechaVencimiento.isEmpty() || CodigoSeguridad.isEmpty() || nombreTitular.isEmpty() || DireccionFact.isEmpty()) {
+             JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
+         } else {
+             String mensaje = "Número de tarjeta: " + numeroTarjeta  + "\n Fecha de Vencimiento: " + FechaVencimiento + "\n Codigo de Seguridad: "+CodigoSeguridad+ "\n Nombre del titular: " +nombreTitular
+                 + "\n Direccion de Facturacion: " +DireccionFact;
+             JOptionPane.showMessageDialog(frame, mensaje);
+            }
+        }
+    }
+     
+    private void showMenuOption2() {
+        // Aquí muestras el menú correspondiente a la opción 2
+        JOptionPane.showMessageDialog(frame, "Opción 2 seleccionada. Mostrar menú 2.");
+    }
+
+    private void showMenuOption3() {
+        // Aquí muestras el menú correspondiente a la opción 3
+        JOptionPane.showMessageDialog(frame, "Opción 3 seleccionada. Mostrar menú 3.");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -254,6 +369,7 @@ public class GUIBuy extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNorth;
