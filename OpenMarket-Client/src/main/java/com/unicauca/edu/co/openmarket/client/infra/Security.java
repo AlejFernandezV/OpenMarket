@@ -9,5 +9,33 @@ import com.unicauca.edu.co.openmarket.commons.domain.User;
  * @author Libardo, Julio
  */
 public class Security {
-    public static User usuario;    
+    public User usuario;   
+    
+    public boolean verifyPassword(char password[]){
+        char contraVerdadera[] = usuario.getPassword().toCharArray();
+        
+        int cantIngresada = password.length;
+        int cantVerdadera = contraVerdadera.length;
+        
+        if(cantIngresada != cantVerdadera){
+            return false;
+        }
+        
+        for(int i=0; i < cantVerdadera; i++){
+            if(password[i]!=contraVerdadera[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public  User getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(User usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 }
