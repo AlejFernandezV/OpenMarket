@@ -307,8 +307,6 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnComprarActionPerformed
 
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseAU;
     private javax.swing.JButton btnComprar;
@@ -325,6 +323,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtProductToFind;
     // End of variables declaration//GEN-END:variables
+    
     public void actualizar() {
         try {
             fillTable(productAccess.findAll() );
