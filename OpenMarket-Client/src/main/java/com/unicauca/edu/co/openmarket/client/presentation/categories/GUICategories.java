@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.categories;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddCategoryCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import com.unicauca.edu.co.openmarket.client.infra.Messages;
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProducts;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.logging.Level;
@@ -68,7 +69,6 @@ public class GUICategories extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Categorías");
         setMinimumSize(new java.awt.Dimension(584, 114));
-        setPreferredSize(new java.awt.Dimension(584, 330));
         setResizable(false);
 
         pnlSouth.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));

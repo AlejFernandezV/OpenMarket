@@ -119,8 +119,8 @@ public class OpenMarketHandler extends ServerHandler implements Observador{
     private String processGetProduct(Protocol protocolRequest) {
         String parameter = protocolRequest.getParameters().get(0).getName();
         String value = protocolRequest.getParameters().get(0).getValue();
-        Product product = null;
-        List<Product> products = null;
+        Product product = new Product();
+        List<Product> products = new ArrayList<>();
         switch(parameter){
             case "id":
                 product = serviceP.findByIdProduct(Long.parseLong(value));

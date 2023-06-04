@@ -1,12 +1,14 @@
 
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.login;
 
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistredUser;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.errorMessage;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
 import com.unicauca.edu.co.openmarket.client.infra.Security;
-import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIAnonymousUsers;
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistred;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import javax.swing.JFrame;
 //import co.edu.unicauca.openmarket.server.access.UserRepositoryImpIArrays;
@@ -15,6 +17,7 @@ import javax.swing.JFrame;
 public class GUILogin extends javax.swing.JFrame {
     
     private static UserAccessImplSockets userAccess = new UserAccessImplSockets();
+    private ProductAccessImplSockets productAccess = new ProductAccessImplSockets();
     private Security sec = new Security();
     
     /**
@@ -24,6 +27,7 @@ public class GUILogin extends javax.swing.JFrame {
         initComponents();
         this.userAccess = userAccess;
         this.setTitle("Open_Market_Login");
+        setLocationRelativeTo(null); //centrar al ventana
     }
 
     /**
@@ -152,10 +156,12 @@ public class GUILogin extends javax.swing.JFrame {
                 if(!sec.verifyPassword(password)){
                     errorMessage("La contraseña que usted ingresó no es correcta", "Atención");
                 }
-                successMessage("Bienvenido!","Login");
-                JFrame frRegistered = new GUIRegistred();
-                frRegistered.setVisible(true);
-                dispose();
+                else{
+                    successMessage("Bienvenido!","Login");
+                    JFrame frRegistered = new GUIRegistred(productAccess);
+                    frRegistered.setVisible(true);
+                    dispose();
+                }
             }
         }catch(Exception e){
             
@@ -164,16 +170,15 @@ public class GUILogin extends javax.swing.JFrame {
 
     private void btnInvitadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvitadoActionPerformed
         successMessage("Bienvenido como usuario anónimo!","Login");
-        JFrame frRegistered = new GUIAnonymousUsers(this, true, new ProductAccessImplSockets());
+        JFrame frRegistered = new GUIAnonymousUsers(this, true, new ProductAccessImplSockets(), userAccess);
         frRegistered.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnInvitadoActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        JFrame frRegistredUser = new GUIRegistredUser(new UserAccessImplSockets());
+        JFrame frRegistredUser = new GUIRegistredUser(new UserAccessImplSockets(), this.productAccess);
         frRegistredUser.setVisible(true);
-        dispose();
-        
+        dispose();        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
