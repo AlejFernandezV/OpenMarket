@@ -61,7 +61,7 @@ public class ProductService {
         return access.findByName(name);
     }
     
-    public Product findProductByDescription(String description) throws Exception{
+    public List<Product> findProductByDescription(String description) throws Exception{
         return access.findByDescription(description);
     }
     

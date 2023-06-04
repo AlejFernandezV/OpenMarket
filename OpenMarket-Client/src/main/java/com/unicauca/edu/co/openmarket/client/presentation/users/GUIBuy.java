@@ -1,28 +1,25 @@
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIBuyer;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
-import com.unicauca.edu.co.openmarket.client.commands.OMAddProductCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
-import com.unicauca.edu.co.openmarket.client.infra.Messages;
-import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import reloj.frameworkobsobs.Observador;
 
 /**
  *
- * @author Libardo Pantoja
+ * @author Julian
  */
-public class GUIBuy extends javax.swing.JFrame {
+public class GUIBuy extends javax.swing.JFrame implements Observador{
 
-    private long contID = 0;
     private ProductAccessImplSockets productAccess;
-    private boolean addOption;
+    private Product purchasedProduct;
+    
     private OMInvoker ominvoker;
     private JFrame frame;
     
@@ -30,10 +27,10 @@ public class GUIBuy extends javax.swing.JFrame {
     /**
      * Creates new form GUIProducts
      */
-    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess1) {
-       
+    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess, Product purchasedProduct) {
         initComponents();
         productAccess = new ProductAccessImplSockets();
+        this.purchasedProduct = purchasedProduct;
         ominvoker = new OMInvoker();
         /*setTitle("Realizar Compra");
         setSize(1000, 500);
@@ -83,7 +80,7 @@ public class GUIBuy extends javax.swing.JFrame {
         pnlNorthLayout.setHorizontalGroup(
             pnlNorthLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNorthLayout.createSequentialGroup()
-                .addContainerGap(270, Short.MAX_VALUE)
+                .addContainerGap(400, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(267, 267, 267))
         );
@@ -101,11 +98,6 @@ public class GUIBuy extends javax.swing.JFrame {
         jLabel2.setText("Selecciona el tipo de Tarjeta");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Visa", "Mastercard", "American Express" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
 
         btnAccept.setText("Aceptar");
         btnAccept.setAlignmentX(10.0F);
@@ -140,14 +132,14 @@ public class GUIBuy extends javax.swing.JFrame {
             .addGroup(pnlCenterLayout.createSequentialGroup()
                 .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlCenterLayout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addComponent(jLabel3))
+                    .addGroup(pnlCenterLayout.createSequentialGroup()
                         .addGap(110, 110, 110)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(jLabel3)))
-                .addGap(18, 18, 18)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(222, 222, 222))
         );
@@ -249,11 +241,6 @@ public class GUIBuy extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
        
          btnAccept.addActionListener(new ActionListener() {
@@ -277,28 +264,6 @@ public class GUIBuy extends javax.swing.JFrame {
         frame.setVisible(true);
          
     }//GEN-LAST:event_btnAcceptActionPerformed
-    private void stateEdit() {
-       
-       
-        //btnCancelar.setVisible(true);
-        btnCerrar.setVisible(false);
-
-       /* txtId.setEnabled(true);
-        txtName.setEnabled(true);
-        txtDescription.setEnabled(true);*/
-    }
-
-    private void stateInitial() {
-      
-        //btnCancelar.setVisible(false);
-        btnCerrar.setVisible(true);
-       
-       /* txtId.setEnabled(false);
-        txtName.setEnabled(false);
-        txtDescription.setEnabled(false);*/
-    
-
-    }
     
      private void showMenuOption1() {
 
@@ -376,65 +341,8 @@ public class GUIBuy extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSouth;
     // End of variables declaration//GEN-END:variables
 
-   /* private void stateNew() {
-       
-        btnCancelar.setVisible(true);
-        btnCerrar.setVisible(false);
-      
-        txtId.setEnabled(false);
-        txtName.setEnabled(true);
-        txtDescription.setEnabled(true);
-       
-
+    @Override
+    public void actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-*/
-    private void cleanControls() {
-       // txtId.setText("");
-        //txtName.setText("");
-        //txtDescription.setText("");
-    }
-/*
-    private void addProduct() throws Exception {
-        Product product = new Product();
-        this.contID ++;
-        String name = txtName.getText().trim();
-        String description = txtDescription.getText().trim();
-        
-        product.setProductId(contID);
-        product.setName(name);
-        product.setDescription(description);
-        
-        OMAddProductCommand comm= new OMAddProductCommand(product, productAccess);
-        ominvoker.addCommand(comm);
-        ominvoker.execute();
-    
-        if (comm.result()) {
-            Messages.successMessage("Se grabó con éxito", "Atención");
-            cleanControls();
-            stateInitial();
-        } else {
-            Messages.successMessage("Error al grabar, lo siento mucho", "Atención");
-        }
-    }
-
-    private void editProduct() throws Exception {
-        String id = txtId.getText().trim();
-        if (id.equals("")) {
-            successMessage("Debe buscar el producto a editar", "Atención");
-            txtId.requestFocus();
-            return;
-        }
-        Long productId = Long.parseLong(id);
-        Product prod = new Product();
-        prod.setName(txtName.getText().trim());
-        prod.setDescription(txtDescription.getText().trim());
-
-        if (productAccess.edit(productId, prod)) {
-            Messages.successMessage("Se editó con éxito", "Atención");
-            cleanControls();
-            stateInitial();
-        } else {
-            Messages.successMessage("Error al editar, lo siento mucho", "Atención");
-        }
-    }*/
 }

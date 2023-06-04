@@ -2,21 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIBuyer;
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProducts;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 
 /**
  *
- * @author nico_
+ * @author Jhossef
  */
 public class GUIRegistred extends javax.swing.JFrame {
     
     private long contID = 0;
-    private ProductAccessImplSockets productAccess;
-    private boolean addOption;
-    private OMInvoker ominvoker;
+    private static ProductAccessImplSockets productAccess;
     
      public ProductAccessImplSockets getProductAccess() {
         return productAccess;
@@ -29,7 +29,8 @@ public class GUIRegistred extends javax.swing.JFrame {
     /**
      * Creates new form GUIResgistred
      */
-    public GUIRegistred() {
+    public GUIRegistred(ProductAccessImplSockets productAccess) {
+        this.productAccess = productAccess;
         initComponents();
     }
 
@@ -124,7 +125,7 @@ public class GUIRegistred extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
-        GUIBuyer instance = new GUIBuyer(this, true, productAccess);
+        GUIBuyer instance = new GUIBuyer(this, false, productAccess);
         instance.setVisible(true);
         productAccess.addObservador(instance);
     }//GEN-LAST:event_btnComprarProductosActionPerformed
@@ -166,7 +167,7 @@ public class GUIRegistred extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIRegistred().setVisible(true);
+                new GUIRegistred(productAccess).setVisible(true);
             }
         });
     }

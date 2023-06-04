@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,8 @@ import javax.swing.table.DefaultTableModel;
 import reloj.frameworkobsobs.Observador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
 
 /**
@@ -24,6 +27,10 @@ import java.util.logging.Logger;
  */
 public class GUIBuyer extends javax.swing.JDialog implements Observador{
     private ProductAccessImplSockets productAccess;
+    private DefaultTableModel model = new DefaultTableModel();
+    
+    private int filaSeleccionada = 0;
+    
     /**
      * Creates new form GUIProductsFind
      */
@@ -46,7 +53,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     }
     
     private void fillTable(List<Product> listProducts) {
-        initializeTable();
+        //initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
 
         Object rowData[] = new Object[3];//No columnas
@@ -124,16 +131,17 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
                 "Id", "Nombre", "Descripción"
             }
         ));
-        tblProducts.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tblProductsAncestorAdded(evt);
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+        tblProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblProducts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblProducts.setShowHorizontalLines(true);
+        tblProducts.setShowVerticalLines(true);
+        tblProducts.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductsMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblProducts);
+        tblProducts.getAccessibleContext().setAccessibleName("");
 
         pnlCenter.add(jScrollPane1);
 
@@ -162,11 +170,6 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         buttonGroup1.add(rdoDescripcion);
         rdoDescripcion.setSelected(true);
         rdoDescripcion.setText("Descripcion");
-        rdoDescripcion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoDescripcionActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -177,11 +180,6 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
 
         buttonGroup1.add(rdoName);
         rdoName.setText("Nombre del producto");
-        rdoName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNameActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -191,11 +189,6 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         pnlNorth.add(rdoName, gridBagConstraints);
 
         txtSearch.setPreferredSize(new java.awt.Dimension(62, 32));
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -252,18 +245,14 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         initializeTable();
-        DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         Object rowData[] = new Object[3];//No columnas
         Product objProduct = null;
+        List<Product> products = new ArrayList<>();
         if(this.rdoDescripcion.isSelected()){
             try {
-                objProduct = productAccess.findByDescription(this.txtSearch.getText());
+                products = productAccess.findByDescription(this.txtSearch.getText());
                 
-                rowData[0] = objProduct.getProductId();
-                rowData[1] = objProduct.getName();
-                rowData[2] = objProduct.getDescription();
-                
-                model.addRow(rowData);
+                fillTable(products);
                 
             } catch (Exception ex) {
                 Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
@@ -284,27 +273,27 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void tblProductsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblProductsAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblProductsAncestorAdded
-
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        GUIBuy instance = new GUIBuy(this, true, productAccess);
-        instance.setVisible(true);
-        productAccess.addObservador((Observador) instance);
+        Long id = Long.parseLong(this.tblProducts.getValueAt(this.filaSeleccionada, 0).toString());
+        Product comprado;
+        try {
+            comprado = productAccess.findById(id);
+            
+            System.out.println("id:"+comprado.getProductId()+" nombre:"+comprado.getName());
+            
+            /*
+            GUIBuy instance = new GUIBuy(this, false, productAccess, comprado);
+            instance.setVisible(true);
+            productAccess.addObservador(instance);
+            */
+        } catch (Exception ex) {
+            Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnComprarActionPerformed
 
-    private void rdoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoNameActionPerformed
-
-    private void rdoDescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDescripcionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdoDescripcionActionPerformed
+    private void tblProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductsMouseClicked
+        this.filaSeleccionada = this.tblProducts.rowAtPoint(evt.getPoint());
+    }//GEN-LAST:event_tblProductsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -343,5 +332,4 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
 }

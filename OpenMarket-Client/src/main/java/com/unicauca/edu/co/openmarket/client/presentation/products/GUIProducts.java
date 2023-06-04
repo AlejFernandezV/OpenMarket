@@ -1,5 +1,6 @@
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.products;
 
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProductsFind;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddProductCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
