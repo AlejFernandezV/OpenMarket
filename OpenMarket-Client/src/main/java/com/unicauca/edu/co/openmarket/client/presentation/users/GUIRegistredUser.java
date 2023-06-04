@@ -1,26 +1,27 @@
 
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.errorMessage;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
 import com.unicauca.edu.co.openmarket.client.infra.Security;
-//import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.domain.enumRoleUser;
 import javax.swing.JFrame;
 
 
 public class GUIRegistredUser extends javax.swing.JFrame {
-    
+    private static ProductAccessImplSockets productAccess;
     private static UserAccessImplSockets userAccess = new UserAccessImplSockets();
     private Security sec = new Security();
 
-    public GUIRegistredUser(UserAccessImplSockets userAccess) {
+    public GUIRegistredUser(UserAccessImplSockets userAccess,ProductAccessImplSockets productAccess) {
         this.userAccess = userAccess;
+        this.productAccess = productAccess;
         initComponents();
         this.setTitle("Open Market Registred");
+        setLocationRelativeTo(null); //centrar al ventana
     }
 
     /**
@@ -66,6 +67,7 @@ public class GUIRegistredUser extends javax.swing.JFrame {
             }
         });
 
+        btnCancelar.setForeground(new java.awt.Color(255, 0, 51));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,32 +86,32 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(123, Short.MAX_VALUE)
-                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
-                .addGap(147, 147, 147)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(144, 144, 144)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtPasswordConfirmation))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel5))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtUser)
+                                .addComponent(txtUserNames)
+                                .addComponent(txtPassword)
+                                .addComponent(txtUserRol, 0, 107, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPasswordConfirmation))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtUser)
-                            .addComponent(txtUserNames)
-                            .addComponent(txtPassword)
-                            .addComponent(txtUserRol, 0, 107, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(118, 118, 118)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,11 +161,14 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         if(txtUserRol.getSelectedItem().toString() == "Vendedor"){
             rol = rol.SELLER;
         }
+        else{
+            rol = rol.REGISTERED;
+        }
         while(!validator){
-            if(password==confirmingPassword){
+            if(password.equals(confirmingPassword)){
                 validator = true;
             }else{
-                errorMessage("contraseña mal ingresada, verifique por favor","Verificar Contraseña");
+                errorMessage("Las contraseñas no coinciden, verifique por favor","Verificar Contraseña");
             }
         }
         try{
@@ -171,13 +176,17 @@ public class GUIRegistredUser extends javax.swing.JFrame {
             validator = userAccess.save(newUser);
             if(!validator){
                 errorMessage("No se pudo realizar el registro","Registro de Usuario");
+                this.txtPassword.setText("");
+                this.txtPasswordConfirmation.setText("");
             }else{
                 successMessage("Bienvenido!","Registro de Usuario");
+                JFrame frRegistered = new GUIRegistred(productAccess);
+                frRegistered.setVisible(true);
+                dispose();
             }
         }catch(Exception e){
-            
+            System.out.println("Error: "+e.getMessage());
         }
-        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
@@ -210,7 +219,7 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUIRegistredUser(userAccess).setVisible(true);
+                new GUIRegistredUser(userAccess,productAccess).setVisible(true);
             }
         });
     }

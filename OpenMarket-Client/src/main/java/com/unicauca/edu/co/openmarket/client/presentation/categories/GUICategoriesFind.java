@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.categories;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProductsFind;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.List;
 import java.util.logging.Level;
@@ -78,7 +79,6 @@ public class GUICategoriesFind extends javax.swing.JDialog implements Observador
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Busqueda de Categorías");
         setMinimumSize(new java.awt.Dimension(567, 84));
-        setPreferredSize(new java.awt.Dimension(700, 478));
 
         pnlCenter.setLayout(new java.awt.BorderLayout());
 

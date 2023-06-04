@@ -9,6 +9,7 @@ import com.unicauca.edu.co.openmarket.commons.infra.JsonError;
 import com.unicauca.edu.co.openmarket.commons.infra.Protocol;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -164,7 +165,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
     }
     
     @Override
-    public Product findByDescription(String description) throws Exception {
+    public List<Product> findByDescription(String description) throws Exception {
         String jsonResponse = null;
         String requestJson = doFindDescriptionProductRequestJSON(description);
         System.out.println(requestJson);
@@ -184,7 +185,7 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 throw new Exception(extractMessages(jsonResponse));
             } else {
                 //Encontró el producto
-                Product product = jsonToProduct(jsonResponse);
+                List<Product> product = jsonToListProducts(jsonResponse);
                 Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
                 return product;
             }
@@ -342,6 +343,21 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         Gson gson = new Gson();
         Product customer = gson.fromJson(jsonCustomer, Product.class);
         return customer;
+
+    }
+    
+    /**
+     * Convierte jsonProducts, proveniente del server socket, de json a un
+     * objeto lista de productos
+     *
+     * @param jsonCustomer objeto cliente en formato json
+     */
+    private List<Product> jsonToListProducts(String jsonProduct) {
+
+        Gson gson = new Gson();
+        Product[] products = gson.fromJson(jsonProduct, Product[].class);
+        List<Product> lstProducts = Arrays.asList(products);
+        return lstProducts;
 
     }
 
