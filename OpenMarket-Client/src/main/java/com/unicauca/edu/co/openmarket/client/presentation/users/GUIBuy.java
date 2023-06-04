@@ -3,6 +3,7 @@ package com.unicauca.edu.co.openmarket.client.presentation.users;
 import com.unicauca.edu.co.openmarket.client.presentation.users.GUIBuyer;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
+import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +17,9 @@ import reloj.frameworkobsobs.Observador;
  */
 public class GUIBuy extends javax.swing.JFrame implements Observador{
 
-    private long contID = 0;
     private ProductAccessImplSockets productAccess;
-    private boolean addOption;
+    private Product purchasedProduct;
+    
     private OMInvoker ominvoker;
     private JFrame frame;
     
@@ -26,10 +27,10 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
     /**
      * Creates new form GUIProducts
      */
-    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess1) {
-       
+    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess, Product purchasedProduct) {
         initComponents();
         productAccess = new ProductAccessImplSockets();
+        this.purchasedProduct = purchasedProduct;
         ominvoker = new OMInvoker();
         /*setTitle("Realizar Compra");
         setSize(1000, 500);
