@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  */
 public class GUIBuyer extends javax.swing.JDialog implements Observador{
     private ProductAccessImplSockets productAccess;
+    
     /**
      * Creates new form GUIProductsFind
      */
@@ -295,7 +296,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         GUIBuy instance = new GUIBuy(this, true, productAccess);
         instance.setVisible(true);
-        productAccess.addObservador((Observador) instance);
+        productAccess.addObservador( instance);
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void rdoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNameActionPerformed

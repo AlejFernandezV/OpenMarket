@@ -10,22 +10,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.*;
+import reloj.frameworkobsobs.Observador;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+//import com.unicauca.edu.co.openmarket.client.presentation.GUIBuyer;
 /**
  *
  * @author Libardo Pantoja
  */
-public class GUIBuy extends javax.swing.JFrame {
+public class GUIBuy extends javax.swing.JFrame implements Observador{
 
     private long contID = 0;
     private ProductAccessImplSockets productAccess;
     private boolean addOption;
     private OMInvoker ominvoker;
     private JFrame frame;
-    
+    JLabel etiquetaProducto = new JLabel();
 
     /**
      * Creates new form GUIProducts
@@ -100,7 +101,7 @@ public class GUIBuy extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Selecciona el tipo de Tarjeta");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Visa", "Mastercard", "American Express" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "    ","Visa", "Mastercard", "PSE" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -264,11 +265,14 @@ public class GUIBuy extends javax.swing.JFrame {
                     showMenuOption1();
                 } else if (selectedOption.equals("Mastercard")) {
                     showMenuOption2();
-                } else if (selectedOption.equals("American Express")) {
+                } else if (selectedOption.equals("PSE")) {
                     showMenuOption3();
                 }
+                
             }
+            
         });
+         
          
         frame.setLayout(new FlowLayout());
         frame.add(jComboBox1);
@@ -351,17 +355,127 @@ public class GUIBuy extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(frame, mensaje);
             }
         }
+     
+     
     }
      
     private void showMenuOption2() {
-        // Aquí muestras el menú correspondiente a la opción 2
-        JOptionPane.showMessageDialog(frame, "Opción 2 seleccionada. Mostrar menú 2.");
+       JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(10, 10));
+
+        JLabel lblNumeroTarjeta = new JLabel("Número de Tarjeta:");
+        JTextField txtNumeroTarjeta = new JTextField();
+
+        JLabel lblFechaVencimiento = new JLabel("Fecha de Vencimiento:");
+        JTextField txtFechaVencimiento = new JTextField();
+
+        JLabel lblCodigoSeguridad = new JLabel("Codigo de Seguridad:");
+        JTextField txtCodigoSeguridad = new JTextField();
+
+        JLabel lblNombreTitular = new JLabel("Nombre del Titular:");
+        JTextField txtNombreTitular = new JTextField();
+
+        JLabel lblDireccionFact = new JLabel("Direccion de Facturación:");
+        JTextField txtDireccionFact = new JTextField();
+
+        panel.add(lblNumeroTarjeta);
+        panel.add(txtNumeroTarjeta);
+        panel.add(lblFechaVencimiento);
+        panel.add(txtFechaVencimiento); 
+        panel.add(lblCodigoSeguridad);
+        panel.add(txtCodigoSeguridad);
+        panel.add(lblNombreTitular);
+        panel.add(txtNombreTitular);
+        panel.add(lblDireccionFact);
+        panel.add(txtDireccionFact);
+    
+
+     int result = JOptionPane.showConfirmDialog(frame, panel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION);
+
+     if (result == JOptionPane.OK_OPTION) {
+         String numeroTarjeta = txtNumeroTarjeta.getText();
+         String FechaVencimiento = txtFechaVencimiento.getText();
+         String CodigoSeguridad = txtCodigoSeguridad.getText();
+         String nombreTitular = txtNombreTitular.getText();
+         String DireccionFact = txtDireccionFact.getText();
+         
+
+         if (numeroTarjeta.isEmpty() || FechaVencimiento.isEmpty() || CodigoSeguridad.isEmpty() || nombreTitular.isEmpty() || DireccionFact.isEmpty()) {
+             JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
+         } else {
+             String mensaje = "Número de tarjeta: " + numeroTarjeta  + "\n Fecha de Vencimiento: " + FechaVencimiento + "\n Codigo de Seguridad: "+CodigoSeguridad+ "\n Nombre del titular: " +nombreTitular
+                 + "\n Direccion de Facturacion: " +DireccionFact;
+             JOptionPane.showMessageDialog(frame, mensaje);
+            }
+        }
     }
 
     private void showMenuOption3() {
-        // Aquí muestras el menú correspondiente a la opción 3
-        JOptionPane.showMessageDialog(frame, "Opción 3 seleccionada. Mostrar menú 3.");
+       JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(10, 10));
+
+        JLabel lblBanco = new JLabel("Banco:");
+        JTextField txtBanco = new JTextField();
+
+        JLabel lblTipoCuenta = new JLabel("Tipo de Cuenta");
+        JTextField txtTipoCuenta = new JTextField();
+
+        JLabel lblNumeroCuenta = new JLabel("Numero de cuenta:");
+        JTextField txtNumeroCuenta = new JTextField();
+
+        JLabel lblNumeroId = new JLabel("Numero de identificacion");
+        JTextField txtNumeroId = new JTextField();
+
+        JLabel lblNombres = new JLabel("Nombre y Apellido");
+        JTextField txtNombres = new JTextField();
+        
+        JLabel lblCorreoElec = new JLabel("Correo electronico:");
+        JTextField txtCorreoElec = new JTextField();
+        
+        JLabel lblTel = new JLabel("Telefono de contacto:");
+        JTextField txtTel = new JTextField();
+
+
+        panel.add(lblBanco);
+        panel.add(txtBanco);
+        panel.add(lblTipoCuenta);
+        panel.add(txtTipoCuenta); 
+        panel.add(lblNumeroCuenta);
+        panel.add(txtNumeroCuenta);
+        panel.add(lblNumeroId);
+        panel.add(txtNumeroId);
+        panel.add(lblNombres);
+        panel.add(txtNombres);
+        panel.add(lblCorreoElec);
+        panel.add(txtCorreoElec);
+        panel.add(lblTel);
+        panel.add(txtTel);
+    
+
+     int result = JOptionPane.showConfirmDialog(frame, panel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION);
+
+     if (result == JOptionPane.OK_OPTION) {
+         String Banco = txtBanco.getText();
+         String TipoCuenta = txtTipoCuenta.getText();
+         String NumeroCuenta  = txtNumeroCuenta.getText();
+         String NumeroId = txtNumeroId.getText();
+         String Nombres = txtNombres.getText();
+         String CorreoElec = txtCorreoElec.getText();
+         String Tel = txtTel.getText();
+         
+
+         if (Banco.isEmpty() || TipoCuenta.isEmpty() || NumeroCuenta.isEmpty() || NumeroId.isEmpty() || Nombres.isEmpty() || CorreoElec.isEmpty()|| Tel.isEmpty()) {
+             JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
+         } else {
+             String mensaje = "Banco: " + Banco  + "\n Tipo de Cuenta: " + TipoCuenta + "\n Numero de Cuenta: "+NumeroCuenta+ "\n Numero de identificación: " +NumeroId
+                 + "\n Nombres y Apellidos " +Nombres+ "\n Correo Electronivo " +CorreoElec +"\n Telefono: ";
+             JOptionPane.showMessageDialog(frame, mensaje);
+            }
+        }
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
@@ -437,4 +551,36 @@ public class GUIBuy extends javax.swing.JFrame {
             Messages.successMessage("Error al editar, lo siento mucho", "Atención");
         }
     }*/
+
+      @Override
+    public void actualizar() {
+        try {
+            fillTable(productAccess.findAll() );
+        } catch (Exception ex) {
+            Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void fillTable(java.util.List<Product> findAll) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+     public void mostrarTabla(){
+        try {
+            fillTable(productAccess.findAll());
+        } catch (Exception ex) {
+            Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     /*listProdcuts.addActionListener(new ActionListener() {
+    public void actionPerformed(ActionEvent e) {
+        // Obtén el producto seleccionado de la lista
+        Product productoSeleccionado = (Product) listaProductos.getSelectedItem();
+
+        // Muestra los datos del producto en la etiqueta de texto
+        etiquetaProducto.setText("Nombre: " + productoSeleccionado.getName()+ ", Precio: " + productoSeleccionado.getDescription());
+    }
+});*/
+     
+     
 }
