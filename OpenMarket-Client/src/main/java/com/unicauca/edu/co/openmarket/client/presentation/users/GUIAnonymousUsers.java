@@ -2,16 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProductsFind;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.client.infra.Messages;
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistredUser;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -20,15 +23,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class GUIAnonymousUsers extends javax.swing.JFrame {
     private ProductAccessImplSockets productAccess;
+    private UserAccessImplSockets userAccess;
     private Messages mens;
     /**
      * Creates new form GUIUsers
      */
-    public GUIAnonymousUsers(java.awt.Frame parent, boolean modal,ProductAccessImplSockets productAccess) {
+    public GUIAnonymousUsers(java.awt.Frame parent, boolean modal,ProductAccessImplSockets productAccess, UserAccessImplSockets userAccess) {
         //super(parent, modal);
         initComponents();
         initializeTable();
         this.productAccess = productAccess;
+        this.userAccess = userAccess;
+        this.mostrarProductos();
         setLocationRelativeTo(null); //centrar al ventana
     }
 
@@ -36,9 +42,9 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         initComponents();
         initializeTable();
         this.productAccess = productAccess;
+        this.mostrarProductos();
         setLocationRelativeTo(null); //centrar al ventana
     }
-
     
     private void initializeTable() {
         tblProducts.setModel(new javax.swing.table.DefaultTableModel(
@@ -73,7 +79,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnMostrarProductos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblBuscarP = new javax.swing.JLabel();
         txtProductToFind = new javax.swing.JTextField();
@@ -89,29 +95,24 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnMostrarProductos.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnMostrarProductos.setForeground(new java.awt.Color(0, 153, 0));
-        btnMostrarProductos.setText("Mostrar Productos");
-        btnMostrarProductos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMostrarProductosActionPerformed(evt);
-            }
-        });
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 2, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 204, 255));
+        jLabel1.setText("OpenMarket");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(339, 339, 339)
-                .addComponent(btnMostrarProductos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(340, 340, 340))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnMostrarProductos)
+                .addComponent(jLabel1)
                 .addContainerGap())
         );
 
@@ -243,15 +244,6 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMostrarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarProductosActionPerformed
-        // TODO add your handling code here:
-        try {
-            fillTable(productAccess.findAll());
-        } catch (Exception ex) {
-            Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btnMostrarProductosActionPerformed
-
     private void btnCloseAUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseAUActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -263,6 +255,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         Object rowData[] = new Object[3];//No columnas
         Product objProduct = null;
+        List<Product> products = new ArrayList<>();
         if(this.rbtnName.isSelected()){
             try {
                 objProduct = productAccess.findByName(this.txtProductToFind.getText());
@@ -279,12 +272,9 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         }
         else{
             try {
-                objProduct = productAccess.findByDescription(this.txtProductToFind.getText());
-                rowData[0] = objProduct.getProductId();
-                rowData[1] = objProduct.getName();
-                rowData[2] = objProduct.getDescription();
+                products = productAccess.findByDescription(this.txtProductToFind.getText());
                 
-                model.addRow(rowData);
+                fillTable(products);
                 
             } catch (Exception ex) {
                 Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
@@ -300,20 +290,19 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
         String[] options = {"Registrarse", "Cerrar"};
         int opc = JOptionPane.showOptionDialog(rootPane, mns, title, JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, title);
         if(opc == 0){
-            //Parte de Guillermo
-            System.out.println("SIII");
+            JFrame registrar = new GUIRegistredUser(this.userAccess,this.productAccess);
+            registrar.setVisible(true);
+            dispose();
         }else if(opc == 1){
             this.dispose();
         }
     }//GEN-LAST:event_btnComprarActionPerformed
 
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCloseAU;
     private javax.swing.JButton btnComprar;
     private javax.swing.JButton btnFindP;
-    private javax.swing.JButton btnMostrarProductos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -325,9 +314,18 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     private javax.swing.JTable tblProducts;
     private javax.swing.JTextField txtProductToFind;
     // End of variables declaration//GEN-END:variables
+    
     public void actualizar() {
         try {
             fillTable(productAccess.findAll() );
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void mostrarProductos(){
+        try {
+            fillTable(productAccess.findAll());
         } catch (Exception ex) {
             Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
         }

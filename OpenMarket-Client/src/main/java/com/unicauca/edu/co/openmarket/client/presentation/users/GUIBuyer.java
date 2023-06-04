@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.users;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -47,7 +48,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     }
     
     private void fillTable(List<Product> listProducts) {
-        initializeTable();
+        //initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
 
         Object rowData[] = new Object[3];//No columnas
@@ -126,10 +127,10 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             }
         ));
         tblProducts.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 tblProductsAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
@@ -256,15 +257,12 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         Object rowData[] = new Object[3];//No columnas
         Product objProduct = null;
+        List<Product> products = new ArrayList<>();
         if(this.rdoDescripcion.isSelected()){
             try {
-                objProduct = productAccess.findByDescription(this.txtSearch.getText());
+                products = productAccess.findByDescription(this.txtSearch.getText());
                 
-                rowData[0] = objProduct.getProductId();
-                rowData[1] = objProduct.getName();
-                rowData[2] = objProduct.getDescription();
-                
-                model.addRow(rowData);
+                fillTable(products);
                 
             } catch (Exception ex) {
                 Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
@@ -296,7 +294,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         GUIBuy instance = new GUIBuy(this, true, productAccess);
         instance.setVisible(true);
-        productAccess.addObservador( instance);
+        productAccess.addObservador(instance);
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void rdoNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNameActionPerformed

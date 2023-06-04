@@ -3,12 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
-package com.unicauca.edu.co.openmarket.client.presentation;
+package com.unicauca.edu.co.openmarket.client.presentation.categories;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddCategoryCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import com.unicauca.edu.co.openmarket.client.infra.Messages;
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProducts;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.util.logging.Level;
@@ -68,7 +69,6 @@ public class GUICategories extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Categorías");
         setMinimumSize(new java.awt.Dimension(584, 114));
-        setPreferredSize(new java.awt.Dimension(584, 330));
         setResizable(false);
 
         pnlSouth.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -241,27 +241,6 @@ public class GUICategories extends javax.swing.JFrame {
         txtIdC.requestFocus();
     }//GEN-LAST:event_btnEditarCActionPerformed
 
-    private void txtIdCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCFocusLost
-        try {
-            if (txtIdC.getText().trim().equals("")) {
-                return;
-            }
-            Long categoryId = Long.parseLong(txtIdC.getText());
-            Category category = categoryAccess.findByIdC(categoryId);
-
-            if (category == null) {
-                successMessage("El identificador del producto no existe", "Error");
-                txtIdC.setText("");
-                txtIdC.requestFocus();
-            } else {
-                txtNombreC.setText(category.getName());
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(GUICategories.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_txtIdCFocusLost
-
     private void btnEliminarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCActionPerformed
         String id = txtIdC.getText().trim();
         if (id.equals("")) {
@@ -296,6 +275,26 @@ public class GUICategories extends javax.swing.JFrame {
         if(!ominvoker.hasMoreCommands())
             this.btnDeshacer.setVisible(false);
     }//GEN-LAST:event_btnDeshacerActionPerformed
+
+    private void txtIdCFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtIdCFocusLost
+        try {
+            if (txtIdC.getText().trim().equals("")) {
+                return;
+            }
+            Long categoryId = Long.parseLong(txtIdC.getText());
+            Category category = categoryAccess.findByIdC(categoryId);
+
+            if (category == null) {
+                successMessage("El identificador del producto no existe", "Error");
+                txtIdC.setText("");
+                txtIdC.requestFocus();
+            } else {
+                txtNombreC.setText(category.getName());
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GUICategories.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtIdCFocusLost
 
     private void stateEdit() {
         btnNuevoC.setVisible(false);

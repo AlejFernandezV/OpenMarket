@@ -5,50 +5,46 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.unicauca.edu.co.openmarket.client.infra.OpenMarketSocket;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
+import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.infra.JsonError;
 import com.unicauca.edu.co.openmarket.commons.infra.Protocol;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import reloj.frameworkobsobs.Observado;
 
 /**
- * Servicio de Cliente. Permite hacer el CRUD de clientes solicitando los
- * servicios con la aplicación server. Maneja los errores devueltos
  *
- * @author Libardo Pantoja, Julio A. Hurtado
+ * @author Alejandro
  */
-public class ProductAccessImplSockets extends Observado implements IProductAccess{
-    /**
-     * El servicio utiliza un socket para comunicarse con la aplicación server
-     */
+public class UserAccessImplSockets extends Observado implements IUserAccess{
+    
     private OpenMarketSocket mySocket;
 
-    public ProductAccessImplSockets() {
+    public UserAccessImplSockets() {
         mySocket = new OpenMarketSocket();
     }
-
+    
     @Override
-    public boolean save(Product newProduct) throws Exception{
+    public boolean save(User newUser) throws Exception{
         String jsonResponse = null;
-        String requestJson = doSaveProductRequestJSON(newProduct);
+        String requestJson = doSaveUserRequestJSON(newUser);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendRequest(requestJson);
             mySocket.disconnect();
 
         } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+            Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
             return false;
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor");            
         } else {
             if (jsonResponse.contains("error")) {
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 throw new Exception(extractMessages(jsonResponse));
             } else {
                 this.notificar();
@@ -58,23 +54,23 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
     }
 
     @Override
-    public boolean edit(Long id, Product product) {
-       String jsonResponse = null;
-        String requestJson = doEditProductRequestJSON(id, product);
+    public boolean edit(String login, User user) throws Exception{
+        String jsonResponse = null;
+        String requestJson = doEditUserRequestJSON(login, user);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendRequest(requestJson);
             mySocket.disconnect();
 
         } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+            Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
             return false;
         }
         if (jsonResponse == null) {
             return false;
         } else {
             if (jsonResponse.contains("error")) {
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
                 return false;
             } else {
                 this.notificar();
@@ -84,9 +80,9 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
     }
 
     @Override
-    public boolean delete(Long id) throws Exception {
+    public boolean delete(String login) throws Exception{
         String jsonResponse = null;
-        String requestJson = doDeleteProductRequestJSON(id);
+        String requestJson = doDeleteUserRequestJSON(login);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendRequest(requestJson);
@@ -109,44 +105,16 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
     }
 
     @Override
-    public Product findById(Long id) throws Exception{
+    public User findByName(String name) throws Exception{
         String jsonResponse = null;
-        String requestJson = doFindIdProductRequestJSON(id);
+        String requestJson = doFindUserByUsernameRequestJSON(name);
         System.out.println(requestJson);
         try {
             mySocket.connect();
             jsonResponse = mySocket.sendRequest(requestJson);
             mySocket.disconnect();
         } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
-        }
-        if (jsonResponse == null) {
-            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-        } else {
-            if (jsonResponse.contains("error")) {
-                //Devolvió algún error
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
-                throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Encontró la categoría
-                Product product = jsonToProduct(jsonResponse);
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
-                return product;
-            }
-        }
-    }
-
-    @Override
-    public Product findByName(String name) throws Exception {
-        String jsonResponse = null;
-        String requestJson = doFindNameProductRequestJSON(name);
-        System.out.println(requestJson);
-        try {
-            mySocket.connect();
-            jsonResponse = mySocket.sendRequest(requestJson);
-            mySocket.disconnect();
-        } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+            Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
         }
         if (jsonResponse == null) {
             throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
@@ -157,135 +125,118 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
                 throw new Exception(extractMessages(jsonResponse));
             } else {
                 //Encontró el producto
-                Product product = jsonToProduct(jsonResponse);
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
-                return product;
+                User user = jsonToUser(jsonResponse);
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
+                return user;
+            }
+        }
+    }
+
+    @Override
+    public User finByLogin(String login) throws Exception{
+        String jsonResponse = null;
+        String requestJson = doFindUserByLoginRequestJSON(login);
+        System.out.println(requestJson);
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendRequest(requestJson);
+            mySocket.disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                //Devolvió algún error
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                //Encontró el user
+                User user = jsonToUser(jsonResponse);
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
+                return user;
+            }
+        }
+    }
+
+    @Override
+    public List<User> findAll() throws Exception{
+        String jsonResponse = null;
+        String requestJson = doFindAllUserRequestJson();
+        try {
+            mySocket.connect();
+            jsonResponse = mySocket.sendRequest(requestJson);
+            mySocket.disconnect();
+        } catch (IOException ex) {
+            Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
+        }
+        if (jsonResponse == null) {
+            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
+        } else {
+            if (jsonResponse.contains("error")) {
+                Logger.getLogger(UserAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
+                throw new Exception(extractMessages(jsonResponse));
+            } else {
+                Type type = new TypeToken<List<Product>>() {}.getType();
+                List<User> users = new Gson().fromJson(jsonResponse, type);
+                return users;
             }
         }
     }
     
-    @Override
-    public List<Product> findByDescription(String description) throws Exception {
-        String jsonResponse = null;
-        String requestJson = doFindDescriptionProductRequestJSON(description);
-        System.out.println(requestJson);
-        try {
-            mySocket.connect();
-            jsonResponse = mySocket.sendRequest(requestJson);
-            mySocket.disconnect();
-        } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
-        }
-        if (jsonResponse == null) {
-            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-        } else {
-            if (jsonResponse.contains("error")) {
-                //Devolvió algún error
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
-                throw new Exception(extractMessages(jsonResponse));
-            } else {
-                //Encontró el producto
-                List<Product> product = jsonToListProducts(jsonResponse);
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, "Lo que va en el JSon: ("+jsonResponse.toString()+ ")");
-                return product;
-            }
-        }
-    }
-
-    @Override
-    public List<Product> findProductsByCategorie(String nameCategorie) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<Product> findAll() throws Exception {
-        String jsonResponse = null;
-        String requestJson = doFindAllProductRequestJson();
-        try {
-            mySocket.connect();
-            jsonResponse = mySocket.sendRequest(requestJson);
-            mySocket.disconnect();
-        } catch (IOException ex) {
-            Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.SEVERE, "No hubo conexión con el servidor", ex);
-        }
-        if (jsonResponse == null) {
-            throw new Exception("No se pudo conectar con el servidor. Revise la red o que el servidor esté escuchando. ");
-        } else {
-            if (jsonResponse.contains("error")) {
-                Logger.getLogger(ProductAccessImplSockets.class.getName()).log(Level.INFO, jsonResponse);
-                throw new Exception(extractMessages(jsonResponse));
-            } else {
-                Type type = new TypeToken<List<Product>>() {}.getType();
-                List<Product> products = new Gson().fromJson(jsonResponse, type);
-                return products;
-            }
-        }
-    }
-
-    private String doSaveProductRequestJSON(Product product){
+    private String doSaveUserRequestJSON(User user){
         
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("post");
-        protocol.addParameter("id", product.getProductId().toString());
-        protocol.addParameter("name", product.getName());
-        protocol.addParameter("description", product.getDescription());
+        protocol.addParameter("login", user.getLogin());
+        protocol.addParameter("username", user.getUsername());
+        protocol.addParameter("password", user.getPassword());
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
         return requestJson;
     }
 
-    private String doEditProductRequestJSON(Long Id, Product product){
+    private String doEditUserRequestJSON(String login, User user){
         
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("put");
-        protocol.addParameter("id", Id.toString());
-        protocol.addParameter("name", product.getName());
-        protocol.addParameter("description", product.getDescription());
+        protocol.addParameter("login", user.getLogin());
+        protocol.addParameter("username", user.getUsername());
+        protocol.addParameter("password", user.getPassword());
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
         return requestJson;
     }
 
-    private String doDeleteProductRequestJSON(Long productId){
+    private String doDeleteUserRequestJSON(String login){
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("delete");
-        protocol.addParameter("id", productId.toString());
+        protocol.addParameter("login", login);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
         return requestJson;
     }
 
-    private String doFindAllProductRequestJson(){
+    private String doFindAllUserRequestJson(){
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("getall");
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
         return requestJson;
     }
-
-    private String doFindIdProductRequestJSON(Long productId){
-        Protocol protocol = new Protocol();
-        protocol.setResource("product");
-        protocol.setAction("get");
-        protocol.addParameter("id", productId.toString());
-
-        Gson gson = new Gson();
-        String requestJson = gson.toJson(protocol);
-
-        return requestJson;
-    }
     
-    private String doFindDescriptionProductRequestJSON(String description){
+    private String doFindUserByLoginRequestJSON(String login){
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("get");
-        protocol.addParameter("description", description);
+        protocol.addParameter("login", login);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
@@ -293,12 +244,12 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
         return requestJson;
     }
 
-    private String doFindNameProductRequestJSON(String name){
+    private String doFindUserByUsernameRequestJSON(String username){
 
         Protocol protocol = new Protocol();
-        protocol.setResource("product");
+        protocol.setResource("user");
         protocol.setAction("get");
-        protocol.addParameter("name", name);
+        protocol.addParameter("name", username);
 
         Gson gson = new Gson();
         String requestJson = gson.toJson(protocol);
@@ -336,29 +287,12 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
      * Convierte jsonCustomer, proveniente del server socket, de json a un
      * objeto Customer
      *
-     * @param jsonCustomer objeto cliente en formato json
+     * @param jsonUser objeto usuario en formato json
      */
-    private Product jsonToProduct(String jsonCustomer) {
+    private User jsonToUser(String jsonUser) {
 
         Gson gson = new Gson();
-        Product customer = gson.fromJson(jsonCustomer, Product.class);
+        User customer = gson.fromJson(jsonUser, User.class);
         return customer;
-
     }
-    
-    /**
-     * Convierte jsonProducts, proveniente del server socket, de json a un
-     * objeto lista de productos
-     *
-     * @param jsonCustomer objeto cliente en formato json
-     */
-    private List<Product> jsonToListProducts(String jsonProduct) {
-
-        Gson gson = new Gson();
-        Product[] products = gson.fromJson(jsonProduct, Product[].class);
-        List<Product> lstProducts = Arrays.asList(products);
-        return lstProducts;
-
-    }
-
 }
