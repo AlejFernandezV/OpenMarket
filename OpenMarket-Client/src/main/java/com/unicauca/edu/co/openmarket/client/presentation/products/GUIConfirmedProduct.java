@@ -298,8 +298,8 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     private void btnCalificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificarActionPerformed
         
         this.product.setCalificacion(calificacion);
-        successMessage("Gracias por calificar el producto: "+ this.product.getName()+ 
-                ", con "+this.product.getCalificacion()+
+        successMessage("Gracias por calificar el producto: " +this.product.getName()+ 
+                ", con " +this.product.getCalificacion()+
                 " estrellas.", "Calificación");
         this.dispose();
     }//GEN-LAST:event_btnCalificarActionPerformed
