@@ -19,11 +19,11 @@ public class CategoriesController {
         this.ominvoker = new OMInvoker();
     }
     
-    public CategoryAccessImplSockets getProductService() {
+    public CategoryAccessImplSockets getCategoryService() {
         return categoryAccess;
     }
 
-    public void setProductService(CategoryAccessImplSockets categoryAccess) {
+    public void setCategoryService(CategoryAccessImplSockets categoryAccess) {
         this.categoryAccess = categoryAccess;
     }
 
@@ -44,7 +44,7 @@ public class CategoriesController {
         return comm.result();
     }
 
-    public boolean editProduct(String id, String name) throws Exception {
+    public boolean editCategory(String id, String name) throws Exception {
         if (id.equals("")) {
             return false;
         }
@@ -56,7 +56,7 @@ public class CategoriesController {
         return categoryAccess.editC(categoryId, category);
     }
     
-    public boolean deleteProduct(String id) throws Exception{
+    public boolean deleteCategory(String id) throws Exception{
         Long categoryId = Long.parseLong(id);
         return categoryAccess.deleteC(categoryId);
     }

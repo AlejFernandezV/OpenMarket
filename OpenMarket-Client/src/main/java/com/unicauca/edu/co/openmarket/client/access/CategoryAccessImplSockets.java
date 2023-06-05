@@ -289,16 +289,16 @@ public class CategoryAccessImplSockets extends Observado implements ICategoryAcc
     }
     
     /**
-     * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * Convierte jsonCategory, proveniente del server socket, de json a un
+     * objeto Category
      *
      * @param jsonCategory objeto categoria en formato json
      */
-    private Category jsonToCategory(String jsonCustomer) {
+    private Category jsonToCategory(String jsonCategory) {
 
         Gson gson = new Gson();
-        Category customer = gson.fromJson(jsonCustomer, Category.class);
-        return customer;
+        Category category = gson.fromJson(jsonCategory, Category.class);
+        return category;
 
     }
 }

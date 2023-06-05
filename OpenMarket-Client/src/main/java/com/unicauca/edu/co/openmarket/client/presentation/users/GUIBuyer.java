@@ -5,20 +5,14 @@
  */
 package com.unicauca.edu.co.openmarket.client.presentation.users;
 
-import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
-import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import reloj.frameworkobsobs.Observador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
 
 
 /**
@@ -216,7 +210,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
         pnlTitle.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         OpenMarketTitle.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        OpenMarketTitle.setText("Open Market");
+        OpenMarketTitle.setText("Open-Market");
         pnlTitle.add(OpenMarketTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         javax.swing.GroupLayout pnlNortLayout = new javax.swing.GroupLayout(pnlNort);
@@ -281,11 +275,6 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             
             System.out.println("id:"+comprado.getProductId()+" nombre:"+comprado.getName());
             
-            /*
-            GUIBuy instance = new GUIBuy(this, false, productAccess, comprado);
-            instance.setVisible(true);
-            productAccess.addObservador(instance);
-            */
         } catch (Exception ex) {
             Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
         }

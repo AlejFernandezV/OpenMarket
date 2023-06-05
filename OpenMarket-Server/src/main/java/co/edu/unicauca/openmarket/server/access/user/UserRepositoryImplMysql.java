@@ -1,9 +1,7 @@
 
 package co.edu.unicauca.openmarket.server.access.user;
 
-import co.edu.unicauca.openmarket.server.access.user.IUserRepository;
 import co.edu.unicauca.openmarket.server.access.product.ProductRepositoryImplMysql;
-import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import java.sql.Connection;
 import java.sql.DriverManager;

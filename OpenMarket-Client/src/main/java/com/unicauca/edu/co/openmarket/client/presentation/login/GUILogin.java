@@ -10,7 +10,6 @@ import com.unicauca.edu.co.openmarket.client.presentation.users.GUIAnonymousUser
 import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistred;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import javax.swing.JFrame;
-//import co.edu.unicauca.openmarket.server.access.UserRepositoryImpIArrays;
 
 
 public class GUILogin extends javax.swing.JFrame {
@@ -25,7 +24,6 @@ public class GUILogin extends javax.swing.JFrame {
     public GUILogin(UserAccessImplSockets userAccess) {
         initComponents();
         this.userAccess = userAccess;
-        this.setTitle("Open_Market_Login");
         setLocationRelativeTo(null); //centrar al ventana
     }
 
@@ -72,7 +70,7 @@ public class GUILogin extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 2, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Open-Market_Login");
+        jLabel4.setText("Open-Market Login");
 
         btnInvitado.setForeground(new java.awt.Color(255, 51, 51));
         btnInvitado.setText("Entrar como invitado");

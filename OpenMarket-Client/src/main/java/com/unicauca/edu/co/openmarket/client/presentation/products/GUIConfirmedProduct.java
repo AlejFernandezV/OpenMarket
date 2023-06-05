@@ -206,7 +206,6 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar5ActionPerformed
-        // TODO add your handling code here:
         
         this.btnStar1.setSelected(false);
         this.btnStar2.setSelected(false);
@@ -275,7 +274,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStar2ActionPerformed
 
     private void btnStar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar1ActionPerformed
-        // TODO add your handling code here:
+        
         this.btnStar1.setSelected(true);
         this.btnStar2.setSelected(false);
         this.btnStar3.setSelected(false);
@@ -292,24 +291,15 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStar1ActionPerformed
 
     private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
-        // TODO add your handling code here:
+        
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
     private void btnCalificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificarActionPerformed
-        // TODO add your handling code here:
+        
         this.product.setCalificacion(calificacion);
         successMessage("Gracias por calificar el producto "+ this.product.getName(), "Exito");
     }//GEN-LAST:event_btnCalificarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     *
-    public static void main(String[] args) {
-        
-        GUIConfirmedProduct gui = new GUIConfirmedProduct();
-        gui.setVisible(true);
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalificar;
