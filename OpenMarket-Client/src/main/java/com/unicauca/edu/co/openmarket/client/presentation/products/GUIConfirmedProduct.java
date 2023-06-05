@@ -4,27 +4,25 @@
  */
 package com.unicauca.edu.co.openmarket.client.presentation.products;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import javax.swing.ImageIcon;
+import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
+import com.unicauca.edu.co.openmarket.commons.domain.Product;
+
 
 /**
  *
  * @author Personal
  */
 public class GUIConfirmedProduct extends javax.swing.JFrame {
-    
+    private Product product;
+    private String calificacion= "";
     /**
      * Creates new form GUIConfirmedPay
      */
-    public GUIConfirmedProduct() {
+    public GUIConfirmedProduct(Product product) {
         initComponents();
         setSize(400, 300);
         Titulo();
-        
+        this.product = product;
     }
 
      /**
@@ -209,7 +207,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
 
     private void btnStar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar5ActionPerformed
         // TODO add your handling code here:
-        String cal = "";
+        
         this.btnStar1.setSelected(false);
         this.btnStar2.setSelected(false);
         this.btnStar3.setSelected(false);
@@ -220,7 +218,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
             this.btnStar2.setSelected(true);
             this.btnStar3.setSelected(true);
             this.btnStar4.setSelected(true);
-            cal = "5";
+            this.calificacion = "5";
         } else {
             this.btnStar1.setSelected(false);
             this.btnStar2.setSelected(false);
@@ -231,8 +229,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStar5ActionPerformed
 
     private void btnStar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar4ActionPerformed
-        // TODO add your handling code here:
-        String cal ="";
+        
         this.btnStar1.setSelected(false);
         this.btnStar2.setSelected(false);
         this.btnStar3.setSelected(false);
@@ -241,7 +238,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
             this.btnStar1.setSelected(true);
             this.btnStar2.setSelected(true);
             this.btnStar3.setSelected(true);
-            cal = "4";
+            this.calificacion = "4";
         } else {
             this.btnStar1.setSelected(false);
             this.btnStar2.setSelected(false);
@@ -250,14 +247,13 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStar4ActionPerformed
 
     private void btnStar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar3ActionPerformed
-        // TODO add your handling code here:
-        String cal ="";
+        
         this.btnStar4.setSelected(false);
         this.btnStar5.setSelected(false);
         if (this.btnStar3.isSelected()) {
             this.btnStar1.setSelected(true);
             this.btnStar2.setSelected(true);
-            cal = "3";
+            this.calificacion = "3";
         } else {
             this.btnStar1.setSelected(false);
             this.btnStar2.setSelected(false);
@@ -265,15 +261,14 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStar3ActionPerformed
 
     private void btnStar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStar2ActionPerformed
-        // TODO add your handling code here:
-        String cal = "";
+        
         this.btnStar1.setSelected(false);
         this.btnStar3.setSelected(false);
         this.btnStar4.setSelected(false);
         this.btnStar5.setSelected(false);
         if (this.btnStar2.isSelected()) {
             this.btnStar1.setSelected(true);
-            cal = "2"; 
+            this.calificacion = "2";
         } else {
             this.btnStar1.setSelected(false);
         }
@@ -292,6 +287,7 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
             this.btnStar3.setSelected(false);
             this.btnStar4.setSelected(false);
             this.btnStar5.setSelected(false);
+            this.calificacion = "1";
         }
     }//GEN-LAST:event_btnStar1ActionPerformed
 
@@ -302,15 +298,18 @@ public class GUIConfirmedProduct extends javax.swing.JFrame {
 
     private void btnCalificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalificarActionPerformed
         // TODO add your handling code here:
+        this.product.setCalificacion(calificacion);
+        successMessage("Gracias por calificar el producto "+ this.product.getName(), "Exito");
     }//GEN-LAST:event_btnCalificarActionPerformed
 
     /**
      * @param args the command line arguments
-     */
+     *
     public static void main(String[] args) {
+        
         GUIConfirmedProduct gui = new GUIConfirmedProduct();
         gui.setVisible(true);
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCalificar;
