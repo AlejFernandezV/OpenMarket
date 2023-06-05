@@ -375,42 +375,67 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
     }
 
     public void Buyproduct() {
-        
-        JFrame productFrame = new JFrame("Detalles del Producto");
-        productFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        JPanel productPanel = new JPanel();
-        productPanel.setLayout(new GridLayout(10, 10));
-        String productInfo = "Producto: " + purchasedProduct.getName() + "\n"
-                + "\n Descripción: " + purchasedProduct.getDescription() + "\n"
-                + "\n Precio: " + purchasedProduct.getPrice();
-        
-        JLabel productLabel = new JLabel(productInfo);
-        productFrame.getContentPane().add(productPanel);
-        // Ajustar el tamaño y hacer visible la ventana
-        productFrame.pack();
-        productFrame.setLocationRelativeTo(null);
-        productFrame.setVisible(true);
-        
-        productPanel.add(productLabel, BorderLayout.CENTER);
-        JButton calificarButton = new JButton("Calificar");
-        productPanel.add(calificarButton, BorderLayout.SOUTH);
-        calificarButton.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            /*GUIConfirmedProduct instance = new GUIConfirmedProduct(purchasedProduct);
-            instance.setVisible(true);
-            productAccess.addObservador((Observador) instance);
-            productFrame.pack();
+            JFrame productFrame = new JFrame("Detalles del Producto");
+            productFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+            JPanel productPanel = new JPanel();
+            productPanel.setLayout(new GridBagLayout()); // Utilizamos GridBagLayout
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.insets = new Insets(5, 5, 5, 5);
+
+            JLabel nameLabel = new JLabel("Producto:");
+            productPanel.add(nameLabel, gbc);
+
+            gbc.gridx = 1;
+            JLabel nameValueLabel = new JLabel(purchasedProduct.getName());
+            productPanel.add(nameValueLabel, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            JLabel descriptionLabel = new JLabel("Descripción:");
+            productPanel.add(descriptionLabel, gbc);
+
+            gbc.gridx = 1;
+            JLabel descriptionValueLabel = new JLabel(purchasedProduct.getDescription());
+            productPanel.add(descriptionValueLabel, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            JLabel priceLabel = new JLabel("Precio:");
+            productPanel.add(priceLabel, gbc);
+
+            gbc.gridx = 1;
+            JLabel priceValueLabel = new JLabel(String.valueOf(purchasedProduct.getPrice()));
+            productPanel.add(priceValueLabel, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 2;
+            gbc.anchor = GridBagConstraints.CENTER;
+            JButton calificarButton = new JButton("Calificar");
+            productPanel.add(calificarButton, gbc);
+
+            calificarButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    /*GUIConfirmedProduct instance = new GUIConfirmedProduct(purchasedProduct);
+                    instance.setVisible(true);
+                    productAccess.addObservador((Observador) instance);*/
+                    productFrame.dispose();
+                }
+            });
+
+            productFrame.getContentPane().add(productPanel);
+
+            // Ajustar el tamaño de la ventana
+            productFrame.setSize(400, 300); // Establece el ancho y alto deseado
+
             productFrame.setLocationRelativeTo(null);
-            productFrame.setVisible(true);*/
-            productFrame.dispose();
+            productFrame.setVisible(true);
         }
-       
-    });
-       productFrame.setSize(500, 400); // Establece el ancho y alto deseado
-       productFrame.setLocationRelativeTo(null);
-       productFrame.setVisible(true);
-    }
     
 }
