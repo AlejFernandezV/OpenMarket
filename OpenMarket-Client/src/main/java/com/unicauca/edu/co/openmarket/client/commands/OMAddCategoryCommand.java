@@ -16,7 +16,6 @@ public class OMAddCategoryCommand extends OMCommand {
         this.cA = cA;
     }
     
-    
     @Override
     public void make() {
         try {

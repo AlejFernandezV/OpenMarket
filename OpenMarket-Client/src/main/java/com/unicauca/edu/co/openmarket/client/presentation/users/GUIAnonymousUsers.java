@@ -9,7 +9,7 @@ import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import com.unicauca.edu.co.openmarket.client.infra.Messages;
-import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistredUser;
+import com.unicauca.edu.co.openmarket.client.presentation.login.GUIRegistredUser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

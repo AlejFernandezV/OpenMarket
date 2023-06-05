@@ -1,5 +1,5 @@
 
-package com.unicauca.edu.co.openmarket.client.presentation.users;
+package com.unicauca.edu.co.openmarket.client.presentation.login;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
@@ -8,6 +8,7 @@ import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.errorMessage;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
 import com.unicauca.edu.co.openmarket.client.infra.Security;
+import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistred;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.domain.enumRoleUser;
 import javax.swing.JFrame;
@@ -162,7 +163,7 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         boolean validator = false;
         enumRoleUser rol = null;
         
-        if(txtUserRol.getSelectedItem().toString() == "Vendedor"){
+        if(txtUserRol.getSelectedItem().equals("Vendedor")){
             rol = rol.SELLER;
         }
         else{
