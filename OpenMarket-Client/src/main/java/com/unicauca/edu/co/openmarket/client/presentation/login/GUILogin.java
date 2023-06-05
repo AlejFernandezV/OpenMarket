@@ -1,7 +1,6 @@
 
 package com.unicauca.edu.co.openmarket.client.presentation.login;
 
-import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistredUser;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.errorMessage;
