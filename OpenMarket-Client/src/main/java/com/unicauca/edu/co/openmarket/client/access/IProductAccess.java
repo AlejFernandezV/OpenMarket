@@ -4,9 +4,8 @@ import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.List;
 
 /**
- * Interface que define los servicios de persistencia de Clientes de la agencia
+ * Interface que define los servicios de persistencia de Clientes de la tienda
  *
- * @author Libardo Pantoja, Julio Hurtado
  */
 public interface IProductAccess {
 

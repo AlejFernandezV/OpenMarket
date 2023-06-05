@@ -22,7 +22,7 @@ public class User {
      */
     private String username;
     /**
-     *
+     *Role del usuario 
      */
     private enumRoleUser role;
     

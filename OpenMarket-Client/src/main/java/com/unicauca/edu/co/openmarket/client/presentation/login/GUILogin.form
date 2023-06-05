@@ -116,7 +116,7 @@
           <Color blue="ff" green="33" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Open-Market_Login"/>
+        <Property name="text" type="java.lang.String" value="Open-Market Login"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnInvitado">

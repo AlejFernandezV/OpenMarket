@@ -334,15 +334,15 @@ public class ProductAccessImplSockets extends Observado implements IProductAcces
     
     /**
      * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * objeto Product
      *
-     * @param jsonCustomer objeto cliente en formato json
+     * @param jsonProduct objeto cliente en formato json
      */
-    private Product jsonToProduct(String jsonCustomer) {
+    private Product jsonToProduct(String jsonProduct) {
 
         Gson gson = new Gson();
-        Product customer = gson.fromJson(jsonCustomer, Product.class);
-        return customer;
+        Product product = gson.fromJson(jsonProduct, Product.class);
+        return product;
 
     }
     

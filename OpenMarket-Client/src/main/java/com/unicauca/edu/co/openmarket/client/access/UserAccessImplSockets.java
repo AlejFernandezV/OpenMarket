@@ -284,15 +284,15 @@ public class UserAccessImplSockets extends Observado implements IUserAccess{
     }
     
     /**
-     * Convierte jsonCustomer, proveniente del server socket, de json a un
-     * objeto Customer
+     * Convierte jsonUSer, proveniente del server socket, de json a un
+     * objeto USer
      *
      * @param jsonUser objeto usuario en formato json
      */
     private User jsonToUser(String jsonUser) {
 
         Gson gson = new Gson();
-        User customer = gson.fromJson(jsonUser, User.class);
-        return customer;
+        User user = gson.fromJson(jsonUser, User.class);
+        return user;
     }
 }

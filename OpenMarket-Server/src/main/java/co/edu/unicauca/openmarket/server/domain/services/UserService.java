@@ -23,7 +23,7 @@ public class UserService extends Observado{
     /**
      * Constructor parametrizado. Hace inyeccion de dependencias
      *
-     * @param repo repositorio de tipo ICustomerRepository
+     * @param repo repositorio de tipo IUserRepository
      */
     public UserService(IUserRepository repo) {
         this.repo = repo;
@@ -50,9 +50,9 @@ public class UserService extends Observado{
     }
 
     /**
-     * Crea una nueva categoria. Aplica validaciones de negocio
+     * Crea un nuevo usuario. Aplica validaciones de negocio
      *
-     * @param category cliente
+     * @param user cliente
      * @return devuelve la cadena "true" si fue creado, en caso contrario retornará errorsJson
      */
     public synchronized String createUser(User user) {

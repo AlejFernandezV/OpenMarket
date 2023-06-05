@@ -30,7 +30,7 @@ public class CategoryService {
         Category newCategory = new Category();
         newCategory.setName(name);
         
-        //Validate product
+        //Validate category
         if (newCategory.getName().isBlank() ) {
             return false;
         }
@@ -60,7 +60,7 @@ public class CategoryService {
 
     public boolean editCategory(Long categoryId, Category category) throws Exception{
         
-        //Validate product
+        //Validate category
         if (category == null || category.getName().isBlank() ) {
             return false;
         }

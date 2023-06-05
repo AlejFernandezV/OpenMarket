@@ -55,7 +55,7 @@ public class GUIRegistred extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel1.setText("Bienvenido");
+        jLabel1.setText("Bienvenido Open-Market");
         pnlTitle.add(jLabel1);
 
         btnCerrarSesion.setText("Cerrar Sesion");

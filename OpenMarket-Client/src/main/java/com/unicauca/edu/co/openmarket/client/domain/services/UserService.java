@@ -6,7 +6,6 @@ import com.unicauca.edu.co.openmarket.commons.domain.User;
 
 /**
  * Servicio de usuarios del sistema
- * @author Libardo, Julio
  */
 public class UserService {
     /**

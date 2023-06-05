@@ -15,7 +15,7 @@ import reloj.frameworkobsobs.Observador;
 
 /**
  *
- * @author william - alejandros
+ * @author william - alejandro
  */
 public class GUICategoriesFind extends javax.swing.JDialog implements Observador{
     private CategoryAccessImplSockets categoryAccess;

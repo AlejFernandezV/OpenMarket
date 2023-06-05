@@ -4,7 +4,6 @@
  */
 package co.edu.unicauca.openmarket.server.access.product;
 
-import co.edu.unicauca.openmarket.server.access.product.IProductRepository;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +77,7 @@ public class ProductRepositoryImplArrays extends Observado implements IProductRe
 
     @Override
     /**
-    * Edita una categoria en el arreglo
+    * Edita un producto en el arreglo
     * 
     * @param id Id del producto a editar
     * @param product objeto producto ya editado

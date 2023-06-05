@@ -1,6 +1,5 @@
 package com.unicauca.edu.co.openmarket.client.presentation.users;
 
-import com.unicauca.edu.co.openmarket.client.presentation.users.GUIBuyer;
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
@@ -35,11 +34,6 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
         productAccess = new ProductAccessImplSockets();
         this.purchasedProduct = purchasedProduct;
         ominvoker = new OMInvoker();
-        /*setTitle("Realizar Compra");
-        setSize(1000, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new FlowLayout());*/
-        //stateInitial();
         setLocationRelativeTo(null);
 
     }

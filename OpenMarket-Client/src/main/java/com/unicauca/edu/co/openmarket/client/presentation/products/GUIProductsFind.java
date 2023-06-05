@@ -92,15 +92,6 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
                 "Id", "Nombre", "Descripción"
             }
         ));
-        tblProducts.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                tblProductsAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
         jScrollPane1.setViewportView(tblProducts);
 
         pnlCenter.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -236,11 +227,6 @@ public class GUIProductsFind extends javax.swing.JDialog implements Observador{
             Logger.getLogger(GUIProductsFind.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchAllActionPerformed
-
-    private void tblProductsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_tblProductsAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tblProductsAncestorAdded
-
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
