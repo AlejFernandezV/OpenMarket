@@ -292,7 +292,7 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
     }//GEN-LAST:event_tblProductsAncestorAdded
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        GUIBuy instance = new GUIBuy(this, true, productAccess);
+        GUIBuy instance = new GUIBuy(this, false, productAccess);
         instance.setVisible(true);
         productAccess.addObservador(instance);
     }//GEN-LAST:event_btnComprarActionPerformed

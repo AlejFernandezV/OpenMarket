@@ -125,7 +125,7 @@ public class GUIRegistred extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
-        GUIBuyer instance = new GUIBuyer(this, true, productAccess);
+        GUIBuyer instance = new GUIBuyer(this, false, productAccess);
         instance.setVisible(true);
         productAccess.addObservador(instance);
     }//GEN-LAST:event_btnComprarProductosActionPerformed

@@ -22,12 +22,12 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
     private boolean addOption;
     private OMInvoker ominvoker;
     private JFrame frame;
-    JLabel etiquetaProducto = new JLabel();
+   // JLabel etiquetaProducto = new JLabel();
 
     /**
      * Creates new form GUIProducts
      */
-    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess1) {
+    public GUIBuy(GUIBuyer aThis, boolean par, ProductAccessImplSockets productAccess) {
        
         initComponents();
         productAccess = new ProductAccessImplSockets();
@@ -63,9 +63,8 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
         pnlCenter = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel1 = new javax.swing.JPanel();
-        btnAccept = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         pnlSouth = new javax.swing.JPanel();
         btnCerrar = new javax.swing.JButton();
 
@@ -97,33 +96,14 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setText("Selecciona el tipo de Tarjeta");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Visa", "Mastercard", "American Express" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "    ","Visa", "Mastercard", "PSE" }));
 
-        btnAccept.setText("Aceptar");
-        btnAccept.setAlignmentX(10.0F);
-        btnAccept.setAlignmentY(50.0F);
-        btnAccept.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAcceptActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(btnAccept, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(67, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
         pnlCenter.setLayout(pnlCenterLayout);
@@ -138,24 +118,22 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
                         .addGap(110, 110, 110)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(222, 222, 222))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton1)))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         pnlCenterLayout.setVerticalGroup(
             pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlCenterLayout.createSequentialGroup()
-                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlCenterLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel3)))
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(65, 65, 65)
+                .addComponent(jLabel3)
+                .addContainerGap(406, Short.MAX_VALUE))
         );
 
         getContentPane().add(pnlCenter, java.awt.BorderLayout.CENTER);
@@ -241,34 +219,19 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
         this.dispose();
     }//GEN-LAST:event_btnCerrarActionPerformed
 
-    private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
-       
-         btnAccept.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
                 String selectedOption = (String) jComboBox1.getSelectedItem();
                 if (selectedOption.equals("Visa")) {
-                    showMenuOption1();
+                    showMenuOption();
                 } else if (selectedOption.equals("Mastercard")) {
-                    showMenuOption2();
+                    showMenuOption();
                 } else if (selectedOption.equals("PSE")) {
                     showMenuOption3();
                 }
-                
-            }
-            
-        });
-         
-         
-        frame.setLayout(new FlowLayout());
-        frame.add(jComboBox1);
-        //frame.add(btnAccept);
-        frame.pack();
-        frame.setVisible(true);
-         
-    }//GEN-LAST:event_btnAcceptActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
     
-     private void showMenuOption1() {
+     private void showMenuOption() {
 
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(10, 10));
@@ -312,7 +275,7 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
 
          if (numeroTarjeta.isEmpty() || FechaVencimiento.isEmpty() || CodigoSeguridad.isEmpty() || nombreTitular.isEmpty() || DireccionFact.isEmpty()) {
              JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
+             showMenuOption(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
          } else {
              String mensaje = "Número de tarjeta: " + numeroTarjeta  + "\n Fecha de Vencimiento: " + FechaVencimiento + "\n Codigo de Seguridad: "+CodigoSeguridad+ "\n Nombre del titular: " +nombreTitular
                  + "\n Direccion de Facturacion: " +DireccionFact;
@@ -322,59 +285,6 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
      
      
     }
-     
-    private void showMenuOption2() {
-       JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(10, 10));
-
-        JLabel lblNumeroTarjeta = new JLabel("Número de Tarjeta:");
-        JTextField txtNumeroTarjeta = new JTextField();
-
-        JLabel lblFechaVencimiento = new JLabel("Fecha de Vencimiento:");
-        JTextField txtFechaVencimiento = new JTextField();
-
-        JLabel lblCodigoSeguridad = new JLabel("Codigo de Seguridad:");
-        JTextField txtCodigoSeguridad = new JTextField();
-
-        JLabel lblNombreTitular = new JLabel("Nombre del Titular:");
-        JTextField txtNombreTitular = new JTextField();
-
-        JLabel lblDireccionFact = new JLabel("Direccion de Facturación:");
-        JTextField txtDireccionFact = new JTextField();
-
-        panel.add(lblNumeroTarjeta);
-        panel.add(txtNumeroTarjeta);
-        panel.add(lblFechaVencimiento);
-        panel.add(txtFechaVencimiento); 
-        panel.add(lblCodigoSeguridad);
-        panel.add(txtCodigoSeguridad);
-        panel.add(lblNombreTitular);
-        panel.add(txtNombreTitular);
-        panel.add(lblDireccionFact);
-        panel.add(txtDireccionFact);
-    
-
-     int result = JOptionPane.showConfirmDialog(frame, panel, "Ingrese los datos", JOptionPane.OK_CANCEL_OPTION);
-
-     if (result == JOptionPane.OK_OPTION) {
-         String numeroTarjeta = txtNumeroTarjeta.getText();
-         String FechaVencimiento = txtFechaVencimiento.getText();
-         String CodigoSeguridad = txtCodigoSeguridad.getText();
-         String nombreTitular = txtNombreTitular.getText();
-         String DireccionFact = txtDireccionFact.getText();
-         
-
-         if (numeroTarjeta.isEmpty() || FechaVencimiento.isEmpty() || CodigoSeguridad.isEmpty() || nombreTitular.isEmpty() || DireccionFact.isEmpty()) {
-             JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
-         } else {
-             String mensaje = "Número de tarjeta: " + numeroTarjeta  + "\n Fecha de Vencimiento: " + FechaVencimiento + "\n Codigo de Seguridad: "+CodigoSeguridad+ "\n Nombre del titular: " +nombreTitular
-                 + "\n Direccion de Facturacion: " +DireccionFact;
-             JOptionPane.showMessageDialog(frame, mensaje);
-            }
-        }
-    }
-
     private void showMenuOption3() {
        JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(10, 10));
@@ -431,7 +341,7 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
 
          if (Banco.isEmpty() || TipoCuenta.isEmpty() || NumeroCuenta.isEmpty() || NumeroId.isEmpty() || Nombres.isEmpty() || CorreoElec.isEmpty()|| Tel.isEmpty()) {
              JOptionPane.showMessageDialog(frame, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-             showMenuOption1(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
+             showMenuOption3(); // Vuelve a llamar al método para mostrar el cuadro de diálogo nuevamente
          } else {
              String mensaje = "Banco: " + Banco  + "\n Tipo de Cuenta: " + TipoCuenta + "\n Numero de Cuenta: "+NumeroCuenta+ "\n Numero de identificación: " +NumeroId
                  + "\n Nombres y Apellidos " +Nombres+ "\n Correo Electronivo " +CorreoElec +"\n Telefono: ";
@@ -442,13 +352,12 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlNorth;
     private javax.swing.JPanel pnlSouth;
