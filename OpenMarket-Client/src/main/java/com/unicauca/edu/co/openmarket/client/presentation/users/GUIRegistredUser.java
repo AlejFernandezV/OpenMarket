@@ -3,6 +3,8 @@ package com.unicauca.edu.co.openmarket.client.presentation.users;
 
 import com.unicauca.edu.co.openmarket.client.access.ProductAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.access.UserAccessImplSockets;
+import com.unicauca.edu.co.openmarket.client.commands.OMAddUserCommand;
+import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.errorMessage;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
 import com.unicauca.edu.co.openmarket.client.infra.Security;
@@ -15,6 +17,7 @@ public class GUIRegistredUser extends javax.swing.JFrame {
     private static ProductAccessImplSockets productAccess;
     private static UserAccessImplSockets userAccess = new UserAccessImplSockets();
     private Security sec = new Security();
+    private OMInvoker ominvoker;
 
     public GUIRegistredUser(UserAccessImplSockets userAccess,ProductAccessImplSockets productAccess) {
         this.userAccess = userAccess;
@@ -22,6 +25,7 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Open Market Registred");
         setLocationRelativeTo(null); //centrar al ventana
+        ominvoker = new OMInvoker();
     }
 
     /**
@@ -173,8 +177,10 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         }
         try{
             User newUser = new User(txtUser.getText(),password,txtUserNames.getText(),rol);
-            validator = userAccess.save(newUser);
-            if(!validator){
+            OMAddUserCommand comm = new OMAddUserCommand(newUser, userAccess);
+            ominvoker.addCommand(comm);
+            ominvoker.execute();
+            if(!comm.result()){
                 errorMessage("No se pudo realizar el registro","Registro de Usuario");
                 this.txtPassword.setText("");
                 this.txtPasswordConfirmation.setText("");

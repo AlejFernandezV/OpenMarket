@@ -2,7 +2,6 @@ package com.unicauca.edu.co.openmarket.client.commands;
 
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
