@@ -8,7 +8,6 @@ package com.unicauca.edu.co.openmarket.client.presentation.categories;
 import com.unicauca.edu.co.openmarket.client.access.CategoryAccessImplSockets;
 import com.unicauca.edu.co.openmarket.client.commands.OMAddCategoryCommand;
 import com.unicauca.edu.co.openmarket.client.commands.OMInvoker;
-import com.unicauca.edu.co.openmarket.client.infra.Messages;
 import com.unicauca.edu.co.openmarket.client.presentation.products.GUIProducts;
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.*;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;

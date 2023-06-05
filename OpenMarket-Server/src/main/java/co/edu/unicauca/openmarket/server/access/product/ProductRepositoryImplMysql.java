@@ -4,7 +4,6 @@
  */
 package co.edu.unicauca.openmarket.server.access.product;
 
-import co.edu.unicauca.openmarket.server.access.product.IProductRepository;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
 import java.sql.Connection;
 import java.sql.DriverManager;

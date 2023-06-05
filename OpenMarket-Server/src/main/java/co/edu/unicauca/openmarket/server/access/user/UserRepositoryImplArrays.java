@@ -57,7 +57,7 @@ public class UserRepositoryImplArrays extends Observado implements IUserReposito
     * Edita un usuario en el arreglo
     * 
     * @param login Username del usuario a editar
-    * @param product objeto user ya editado
+    * @param user objeto user ya editado
     * @return true si se editó con éxito, en caso contrario false.
     */
     public boolean edit(String login, User user) {

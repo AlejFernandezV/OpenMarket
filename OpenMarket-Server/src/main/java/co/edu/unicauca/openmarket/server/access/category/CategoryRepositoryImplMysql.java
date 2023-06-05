@@ -4,8 +4,6 @@
  */
 package co.edu.unicauca.openmarket.server.access.category;
 
-import co.edu.unicauca.openmarket.server.access.category.ICategoryRepository;
-import co.unicauca.strategyserver.helpers.Utilities;
 import com.unicauca.edu.co.openmarket.commons.domain.Category;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -34,11 +32,10 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
 
         try {
             
-            //Validate product
+            //Validate category
             if (newCategory == null || newCategory.getName().isBlank()) {
                 return false;
             }
-            //this.connect();
 
             String sql = "INSERT INTO categories ( name ) "
                     + "VALUES ( ? )";
@@ -60,7 +57,6 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
         try {
 
             String sql = "SELECT * FROM categories";
-            //this.connect();
 
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
@@ -71,7 +67,6 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
 
                 categories.add(newCategory);
             }
-            //this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryRepositoryImplMysql.class.getName()).log(Level.SEVERE, null, ex);
@@ -90,7 +85,6 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
             this.connect();
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
-            //this.disconnect();
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryRepositoryImplMysql.class.getName()).log(Level.SEVERE, null, ex);
@@ -125,11 +119,10 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
     @Override
     public boolean editC(Long categoryid, Category category) {
         try {
-            //Validate product
+            //Validate category
             if (categoryid <= 0 || category == null) {
                 return false;
             }
-            //this.connect();
 
             String sql = "UPDATE  categories "
                     + "SET name=?"
@@ -139,7 +132,6 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
             pstmt.setString(1, category.getName());
             pstmt.setLong(2, categoryid);
             pstmt.executeUpdate();
-            //this.disconnect();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(CategoryRepositoryImplMysql.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +142,7 @@ public class CategoryRepositoryImplMysql implements ICategoryRepository{
     @Override
     public boolean deleteC(Long idC) {
         try {
-            //Validate product
+            //Validate category 
             if (idC <= 0) {
                 return false;
             }

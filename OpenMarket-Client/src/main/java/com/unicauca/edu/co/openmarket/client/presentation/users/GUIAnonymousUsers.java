@@ -97,7 +97,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 2, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 204, 255));
-        jLabel1.setText("OpenMarket");
+        jLabel1.setText("Open-Market");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -245,12 +245,12 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCloseAUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseAUActionPerformed
-        // TODO add your handling code here:
+        
         this.dispose();
     }//GEN-LAST:event_btnCloseAUActionPerformed
 
     private void btnFindPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPActionPerformed
-        // TODO add your handling code here:
+        
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProducts.getModel();
         Object rowData[] = new Object[3];//No columnas
@@ -283,7 +283,7 @@ public class GUIAnonymousUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFindPActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
+        
         String mns, title;
         mns = "Necesitas estar registrado para poder comprar";
         title = "Registrar usuario";
