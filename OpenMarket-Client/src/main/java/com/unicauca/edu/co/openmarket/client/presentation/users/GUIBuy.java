@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import reloj.frameworkobsobs.Observador;
+import com.unicauca.edu.co.openmarket.client.presentation.products.GUIConfirmedProduct;
+
 
 /**
  *
@@ -281,10 +283,10 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
              String mensaje = "Número de tarjeta: " + numeroTarjeta  + "\n Fecha de Vencimiento: " + FechaVencimiento + "\n Codigo de Seguridad: "+CodigoSeguridad+ "\n Nombre del titular: " +nombreTitular
                  + "\n Direccion de Facturacion: " +DireccionFact;
              JOptionPane.showMessageDialog(frame, mensaje);
+              
             }
+         Buyproduct();
         }
-     
-     
     }
     private void showMenuOption3() {
        JPanel panel = new JPanel();
@@ -347,10 +349,13 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
              String mensaje = "Banco: " + Banco  + "\n Tipo de Cuenta: " + TipoCuenta + "\n Numero de Cuenta: "+NumeroCuenta+ "\n Numero de identificación: " +NumeroId
                  + "\n Nombres y Apellidos " +Nombres+ "\n Correo Electronivo " +CorreoElec +"\n Telefono: ";
              JOptionPane.showMessageDialog(frame, mensaje);
+              
             }
+         Buyproduct();
         }
+     
+     
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
@@ -368,4 +373,44 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
     public void actualizar() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public void Buyproduct() {
+        
+        JFrame productFrame = new JFrame("Detalles del Producto");
+        productFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        JPanel productPanel = new JPanel();
+        productPanel.setLayout(new GridLayout(10, 10));
+        String productInfo = "Producto: " + purchasedProduct.getName() + "\n"
+                + "\n Descripción: " + purchasedProduct.getDescription() + "\n"
+                + "\n Precio: " + purchasedProduct.getPrice();
+        
+        JLabel productLabel = new JLabel(productInfo);
+        productFrame.getContentPane().add(productPanel);
+        // Ajustar el tamaño y hacer visible la ventana
+        productFrame.pack();
+        productFrame.setLocationRelativeTo(null);
+        productFrame.setVisible(true);
+        
+        productPanel.add(productLabel, BorderLayout.CENTER);
+        JButton calificarButton = new JButton("Calificar");
+        productPanel.add(calificarButton, BorderLayout.SOUTH);
+        calificarButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            /*GUIConfirmedProduct instance = new GUIConfirmedProduct(purchasedProduct);
+            instance.setVisible(true);
+            productAccess.addObservador((Observador) instance);
+            productFrame.pack();
+            productFrame.setLocationRelativeTo(null);
+            productFrame.setVisible(true);*/
+            productFrame.dispose();
+        }
+       
+    });
+       productFrame.setSize(500, 400); // Establece el ancho y alto deseado
+       productFrame.setLocationRelativeTo(null);
+       productFrame.setVisible(true);
+    }
+    
 }
