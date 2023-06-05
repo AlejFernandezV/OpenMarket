@@ -11,10 +11,12 @@ import com.unicauca.edu.co.openmarket.client.infra.Security;
 import com.unicauca.edu.co.openmarket.client.presentation.users.GUIRegistred;
 import com.unicauca.edu.co.openmarket.commons.domain.User;
 import com.unicauca.edu.co.openmarket.commons.domain.enumRoleUser;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import reloj.frameworkobsobs.Observador;
 
 
-public class GUIRegistredUser extends javax.swing.JFrame {
+public class GUIRegistredUser extends javax.swing.JFrame implements Observador{
     private static ProductAccessImplSockets productAccess;
     private static UserAccessImplSockets userAccess = new UserAccessImplSockets();
     private Security sec = new Security();
@@ -27,6 +29,10 @@ public class GUIRegistredUser extends javax.swing.JFrame {
         this.setTitle("Open Market Registred");
         setLocationRelativeTo(null); //centrar al ventana
         ominvoker = new OMInvoker();
+    }
+
+    public GUIRegistredUser(ActionListener aThis, boolean b, ProductAccessImplSockets productAccess) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**
@@ -246,4 +252,9 @@ public class GUIRegistredUser extends javax.swing.JFrame {
     private javax.swing.JTextField txtUserNames;
     private javax.swing.JComboBox<String> txtUserRol;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

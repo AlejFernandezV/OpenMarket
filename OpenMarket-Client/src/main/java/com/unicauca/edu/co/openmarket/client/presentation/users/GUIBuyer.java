@@ -275,6 +275,10 @@ public class GUIBuyer extends javax.swing.JDialog implements Observador{
             
             System.out.println("id:"+comprado.getProductId()+" nombre:"+comprado.getName());
             
+            GUIBuy instance = new GUIBuy(this, false, productAccess, comprado);
+            instance.setVisible(true);
+            productAccess.addObservador(instance);
+
         } catch (Exception ex) {
             Logger.getLogger(GUIBuyer.class.getName()).log(Level.SEVERE, null, ex);
         }
