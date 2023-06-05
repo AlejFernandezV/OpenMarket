@@ -6,12 +6,7 @@ package com.unicauca.edu.co.openmarket.client.presentation.products;
 
 import static com.unicauca.edu.co.openmarket.client.infra.Messages.successMessage;
 import com.unicauca.edu.co.openmarket.commons.domain.Product;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
-import javax.swing.ImageIcon;
+
 
 /**
  *
