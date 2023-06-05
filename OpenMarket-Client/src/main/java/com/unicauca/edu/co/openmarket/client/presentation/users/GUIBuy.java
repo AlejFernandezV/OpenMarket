@@ -416,9 +416,9 @@ public class GUIBuy extends javax.swing.JFrame implements Observador{
             calificarButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    /*GUIConfirmedProduct instance = new GUIConfirmedProduct(purchasedProduct);
+                    GUIConfirmedProduct instance = new GUIConfirmedProduct(purchasedProduct);
                     instance.setVisible(true);
-                    productAccess.addObservador((Observador) instance);*/
+                    productAccess.addObservador((Observador) instance);
                     productFrame.dispose();
                 }
             });
